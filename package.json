@@ -9,7 +9,6 @@
   "dependencies": {
     "vue": "^3.2.6",
     "vue-router": "^4.0.11",
-    "vue-web3": "^2.1.0",
     "web3": "^1.5.2"
   },
   "devDependencies": {
