@@ -1,8 +1,8 @@
-<!--./src/components/Resources.vue -->
+<!--./src/components/Community.vue -->
 
 <template>
   <div class="section">
-    <h1 class="text-center font-semibold">Links &amp; Resources</h1>
+    <h1 class="text-center font-semibold">Community</h1>
     <ul class="text-center">
       <li><a class="underline hover:text-blue-500" href="https://benswap.cash/">benswap.cash</a> - The smartBCH DEX.</li>
       <li><a class="underline hover:text-blue-500" href="https://coinflex.com/">coinflex.com</a> - Buy smartBCH.</li>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "Resources",
+  name: "Community",
 };
 </script>
 

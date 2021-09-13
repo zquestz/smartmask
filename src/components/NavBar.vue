@@ -7,7 +7,7 @@
             <router-link to="/">Wallet</router-link>
           </li>
           <li class="mr-5 text-sm font-semibold hover:text-blue-500 text-white">
-            <router-link to="resources">Resources</router-link>
+            <router-link to="community">Community</router-link>
           </li>
           <li class="mr-5 text-sm font-semibold hover:text-blue-500 text-white">
             <router-link to="about">About</router-link>

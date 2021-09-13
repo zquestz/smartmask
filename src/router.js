@@ -2,7 +2,7 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
 import About from './components/About.vue'
-import Resources from './components/Resources.vue'
+import Community from './components/Community.vue'
 import SmartMask from './components/SmartMask.vue'
 
 export default createRouter({
@@ -13,8 +13,8 @@ export default createRouter({
       component: SmartMask,
     },
     {
-      path: '/resources',
-      component: Resources,
+      path: '/community',
+      component: Community,
     },
     {
       path: '/about',
