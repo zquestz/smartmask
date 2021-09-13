@@ -4,7 +4,7 @@ A small web based smartBCH wallet powered by MetaMask.
 
 Build & Run the Docker Image
 ----------------------------
-In order to build and run the site just run:
+In order to build and run the site:
 
 1. `docker build -t smartmask .`
 2. `docker run -p 8888:80 smartmask:latest`
