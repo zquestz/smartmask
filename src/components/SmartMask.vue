@@ -3,12 +3,18 @@
 <template>
   <div class="section">
     <h1 class="text-center font-semibold">SmartMask</h1>
+    <p class="text-center" v-if="!validNetwork">Please connect to the smartBCH network!</p>
   </div>
 </template>
 
 <script>
 export default {
   name: "SmartMask",
+  data: function() {
+    return {
+      validNetwork: window.ethereum.chainId === '0x2710',
+    };
+  },
 };
 </script>
 

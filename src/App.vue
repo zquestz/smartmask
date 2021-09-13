@@ -8,6 +8,7 @@
 </template>
 
 <script type="text/javascript">
+import _ from 'web3/dist/web3.min.js'
 import NavBar from "./components/NavBar.vue";
 
 export default {
