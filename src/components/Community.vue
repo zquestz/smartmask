@@ -5,36 +5,52 @@
     <h1 class="text-center font-semibold">Community</h1>
     <ul class="m-auto text-center mt-2 max-w-xs">
       <li class="mb-8">
-        <a href="https://benswap.cash/"
-          ><img class="mx-auto mb-2" src="/img/benswap.png"></a
-        >
+        <img
+          @click="goToURI('https://benswap.cash/')"
+          class="cursor-pointer mx-auto mb-2"
+          src="/img/benswap.png"
+          width="200"
+          height="35"
+        />
         <a class="underline text-blue-500" href="https://benswap.cash/"
           >benswap.cash</a
         >
         - The smartBCH DEX.
       </li>
       <li class="mb-8">
-        <a href="https://coinflex.com/"
-          ><img class="mx-auto mb-2" src="/img/coinflex.png"></a
-        >
+        <img
+          @click="goToURI('https://coinflex.com/')"
+          class="cursor-pointer mx-auto mb-2"
+          src="/img/coinflex.png"
+          width="200"
+          height="38"
+        />
         <a class="underline text-blue-500" href="https://coinflex.com/"
           >coinflex.com</a
         >
         - Buy smartBCH.
       </li>
       <li class="mb-8">
-        <a href="https://smartbch.org/"
-          ><img class="mx-auto mb-2" src="/img/smartbch.png"></a
-        >
+        <img
+          @click="goToURI('https://smartbch.org/')"
+          class="cursor-pointer mx-auto mb-2"
+          src="/img/smartbch.png"
+          width="200"
+          height="47"
+        />
         <a class="underline text-blue-500" href="https://smartbch.org/"
           >smartbch.org</a
         >
         - Information about the main smartBCH project!
       </li>
       <li>
-        <a href="https://marketcap.cash/"
-          ><img class="mx-auto mb-2" src="/img/marketcapcash.png"></a
-        >
+        <img
+          @click="goToURI('https://marketcap.cash/')"
+          class="cursor-pointer mx-auto mb-2"
+          src="/img/marketcapcash.png"
+          width="200"
+          height="22"
+        />
         <a class="underline text-blue-500" href="https://marketcap.cash/"
           >marketcap.cash</a
         >
@@ -47,6 +63,11 @@
 <script>
 export default {
   name: "Community",
+  methods: {
+    goToURI: function (uri) {
+      location.href = uri;
+    },
+  },
 };
 </script>
 
