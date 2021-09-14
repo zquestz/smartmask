@@ -39,7 +39,7 @@ export default {
       timer: null,
     };
   },
-  created: async function() {
+  mounted: async function() {
     await this.checkState()
     this.timer = setIntervalAsync(this.checkState, 5000);
     this.addBindings()
