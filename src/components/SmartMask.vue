@@ -20,8 +20,9 @@ import Web3 from 'web3/dist/web3.min.js'
 
 const web3js = new Web3(window.ethereum);
 
-window.web3js = web3js
-window.Web3NoMeta = Web3
+// Debugging helpers.
+// window.web3js = web3js
+// window.Web3NoMeta = Web3
 
 export default {
   name: "SmartMask",
