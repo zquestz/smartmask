@@ -9,7 +9,7 @@
       <QR :account="activeAccount" :size="200" />
       <div class="text-center overflow-hidden overflow-ellipsis">
         <a
-          class="text-xs text-blue-500"
+          class="text-xs text-blue-500 active:text-blue-700 hover:text-blue-700"
           v-bind:href="smartScanURI(activeAccount)"
           >{{ activeAccount }}</a
         ><br />
@@ -21,6 +21,7 @@
             m-1
             bg-blue-500
             hover:bg-blue-700
+            active:bg-blue-900
             text-white
             font-bold
             py-2
@@ -36,6 +37,7 @@
             m-1
             bg-blue-500
             hover:bg-blue-700
+            active:bg-blue-900
             text-white
             font-bold
             py-2

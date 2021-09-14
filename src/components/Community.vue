@@ -12,7 +12,14 @@
           width="200"
           height="35"
         />
-        <a class="underline text-blue-500" href="https://benswap.cash/"
+        <a
+          class="
+            underline
+            text-blue-500
+            hover:text-blue-700
+            active:text-blue-900
+          "
+          href="https://benswap.cash/"
           >benswap.cash</a
         >
         - The smartBCH DEX.
@@ -25,7 +32,14 @@
           width="200"
           height="38"
         />
-        <a class="underline text-blue-500" href="https://coinflex.com/"
+        <a
+          class="
+            underline
+            text-blue-500
+            hover:text-blue-700
+            active:text-blue-900
+          "
+          href="https://coinflex.com/"
           >coinflex.com</a
         >
         - Buy smartBCH.
@@ -38,7 +52,14 @@
           width="200"
           height="47"
         />
-        <a class="underline text-blue-500" href="https://smartbch.org/"
+        <a
+          class="
+            underline
+            text-blue-500
+            hover:text-blue-700
+            active:text-blue-900
+          "
+          href="https://smartbch.org/"
           >smartbch.org</a
         >
         - Information about the main smartBCH project!
@@ -51,7 +72,14 @@
           width="200"
           height="22"
         />
-        <a class="underline text-blue-500" href="https://marketcap.cash/"
+        <a
+          class="
+            underline
+            text-blue-500
+            hover:text-blue-700
+            active:text-blue-900
+          "
+          href="https://marketcap.cash/"
           >marketcap.cash</a
         >
         - Price information for smartBCH tokens.
