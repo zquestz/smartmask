@@ -11,7 +11,6 @@
         <a
           class="text-xs text-blue-500"
           v-bind:href="smartScanURI(activeAccount)"
-          target="_blank"
           >{{ activeAccount }}</a
         ><br />
       </div>
@@ -110,7 +109,7 @@ export default {
       clipboardData.writeText(this.activeAccount);
     },
     goToSmartScan: function () {
-      window.open(this.smartScanURI(this.activeAccount), "_blank").focus();
+      location.href = this.smartScanURI(this.activeAccount);
     },
     resetConnection: function () {
       this.connected = false;
