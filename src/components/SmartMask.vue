@@ -13,7 +13,39 @@
           v-bind:href="smartScanURI(activeAccount)"
           target="_blank"
           >{{ activeAccount }}</a
+        ><br />
+      </div>
+      <div class="m-3 text-center">
+        <button
+          @click="copyAccount()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
         >
+          Copy
+        </button>
+        <button
+          @click="goToSmartScan()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Explorer
+        </button>
       </div>
     </div>
   </div>
@@ -67,6 +99,18 @@ export default {
         this.resetConnection();
         this.checkState();
       });
+    },
+    copyAccount: function () {
+      const clipboardData =
+        event.clipboardData ||
+        window.clipboardData ||
+        event.originalEvent?.clipboardData ||
+        navigator.clipboard;
+
+      clipboardData.writeText(this.activeAccount);
+    },
+    goToSmartScan: function () {
+      window.open(this.smartScanURI(this.activeAccount), "_blank").focus();
     },
     resetConnection: function () {
       this.connected = false;
