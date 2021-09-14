@@ -4,8 +4,8 @@
   <div class="section">
     <h1 class="text-center font-semibold">SmartMask</h1>
     <p class="text-center" v-if="showError()">{{errorMessage}}</p>
-    <p class="text-center mt-2">{{balance}} BCH</p>
     <div v-if="hasAccounts()">
+      <p class="text-center mt-2">{{balance}} BCH</p>
       <QR v-if="hasActiveAccount()" :account="activeAccount" :size="200" />
       <div class="text-center overflow-hidden overflow-ellipsis">
         <a class="text-xs text-blue-500" v-bind:href="smartScanURI(activeAccount)" target="_blank">{{ activeAccount }}</a>
