@@ -41,7 +41,7 @@ export default {
   },
   created: async function() {
     await this.checkState()
-    this.timer = setIntervalAsync(this.updateAccount, 15000);
+    this.timer = setIntervalAsync(this.checkState, 15000);
     this.addBindings()
   },
   beforeDestroy: function() {

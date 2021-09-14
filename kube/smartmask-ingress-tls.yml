@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: smartmask-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - smartmask.greyh.at
+    secretName: smartmask-tls
+  defaultBackend:
+    service:
+      name: smartmask
+      port:
+        number: 164
+  rules:
+  - host: smartmask.greyh.at
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: smartmask
+            port:
+              number: 164

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  labels:
+    service: smartmask
+  name: smartmask
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      service: smartmask
+  template:
+    metadata:
+      labels:
+        service: smartmask
+    spec:
+      containers:
+      - image: zquestz/smartmask:latest
+        imagePullPolicy: Always
+        name: smartmask
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "16Mi"
+      restartPolicy: Always

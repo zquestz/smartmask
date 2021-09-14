@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartmask
+  namespace: default
+spec:
+  ports:
+    - port: 164
+      targetPort: 80
+  selector:
+    service: smartmask
+  type: NodePort
