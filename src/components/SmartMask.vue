@@ -4,10 +4,12 @@
   <div class="section">
     <h1 class="text-center font-semibold">SmartMask</h1>
     <p class="text-center" v-if="showError()">{{errorMessage}}</p>
-    <h2 class="text-center" v-if="hasAccounts()">Accounts</h2>
-    <ul class="text-center">
-      <li v-for="(account, index) in accounts" :key="index">{{ account }}</li>
-    </ul>
+    <h2 class="text-center" v-if="hasAccounts()">Account</h2>
+    <div class="text-center" v-if="hasAccounts()">
+      <select class="inline-block w-128" v-model="activeAccount">
+        <option class="text-center" v-for="(account, _) in accounts" :key="account">{{ account }}</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -19,6 +21,7 @@ export default {
       connected: null,
       accounts: [],
       errorMessage: "",
+      activeAccount: "",
     };
   },
   created: async function() {
@@ -42,6 +45,9 @@ export default {
         if (this.connected !== true) {
           try {
             this.accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+            if (this.accounts.length > 0) {
+              this.activeAccount = this.accounts[0]
+            }
             this.connected = true
           } catch (error) {
             if (error.code === 4001) {
@@ -59,7 +65,8 @@ export default {
       this.connected = null
       this.accounts = []
       this.errorMessage = ""
-    }
+      this.activeAccount = ""
+    },
   }
 }
 </script>
