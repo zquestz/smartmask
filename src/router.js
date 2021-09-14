@@ -1,24 +1,24 @@
 /* ./src/router.css */
 
-import { createRouter, createWebHistory } from 'vue-router'
-import About from './components/About.vue'
-import Community from './components/Community.vue'
-import SmartMask from './components/SmartMask.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import About from "./components/About.vue";
+import Community from "./components/Community.vue";
+import SmartMask from "./components/SmartMask.vue";
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: "/",
       component: SmartMask,
     },
     {
-      path: '/community',
+      path: "/community",
       component: Community,
     },
     {
-      path: '/about',
+      path: "/about",
       component: About,
-    }
-  ]
-})
+    },
+  ],
+});

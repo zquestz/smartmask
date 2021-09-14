@@ -14,19 +14,19 @@ export default {
   components: {
     NavBar,
   },
-  data: function() {
+  data: function () {
     return {
-      version: '0.1.0',
+      version: "0.1.0",
     };
   },
 };
 </script>
 
 <style>
-  body {
-    width: 100vw;
-    min-width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
-  }
+body {
+  width: 100vw;
+  min-width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+}
 </style>

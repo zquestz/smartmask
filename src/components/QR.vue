@@ -3,13 +3,12 @@
 </template>
 
 <script>
-  import QrcodeVue from 'qrcode.vue'
+import QrcodeVue from "qrcode.vue";
 
-
-  export default {
-    props: ["account", "size"],
-    components: {
-      QrcodeVue,
-    },
-  }
+export default {
+  props: ["account", "size"],
+  components: {
+    QrcodeVue,
+  },
+};
 </script>

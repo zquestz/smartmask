@@ -3,22 +3,27 @@
 <template>
   <div class="section">
     <h1 class="text-center font-semibold">SmartMask</h1>
-    <p class="text-center" v-if="showError()">{{errorMessage}}</p>
-    <div v-if="hasAccounts()">
-      <p class="text-center mt-2">{{balance}} BCH</p>
-      <QR v-if="hasActiveAccount()" :account="activeAccount" :size="200" />
+    <p class="text-center" v-if="hasError()">{{ errorMessage }}</p>
+    <div v-if="hasActiveAccount()">
+      <p class="text-center mt-2">{{ balance }} BCH</p>
+      <QR :account="activeAccount" :size="200" />
       <div class="text-center overflow-hidden overflow-ellipsis">
-        <a class="text-xs text-blue-500" v-bind:href="smartScanURI(activeAccount)" target="_blank">{{ activeAccount }}</a>
+        <a
+          class="text-xs text-blue-500"
+          v-bind:href="smartScanURI(activeAccount)"
+          target="_blank"
+          >{{ activeAccount }}</a
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import QR from './QR.vue'
-import Web3 from 'web3/dist/web3.min.js'
-import { setIntervalAsync } from 'set-interval-async/fixed'
-import { clearIntervalAsync } from 'set-interval-async'
+import QR from "./QR.vue";
+import Web3 from "web3/dist/web3.min.js";
+import { setIntervalAsync } from "set-interval-async/fixed";
+import { clearIntervalAsync } from "set-interval-async";
 
 const web3js = new Web3(window.ethereum);
 
@@ -28,111 +33,156 @@ const web3js = new Web3(window.ethereum);
 
 export default {
   name: "SmartMask",
-  data: function() {
+  data: function () {
     return {
       connected: null,
-      pending_connection: null,
+      pendingConnection: null,
       accounts: [],
       errorMessage: "",
       activeAccount: "",
       balance: 0,
+      stopRequests: false,
       timer: null,
     };
   },
-  mounted: async function() {
-    await this.checkState()
+  mounted: async function () {
+    await this.checkState();
+    this.addBindings();
     this.timer = setIntervalAsync(this.checkState, 5000);
-    this.addBindings()
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     this.cancelAutoUpdate();
   },
   components: {
     QR,
   },
   methods: {
-    addBindings: function() {
-      window.ethereum.on('chainChanged', (chainId) => {
-        this.connected = false
-        this.checkState()
+    addBindings: function () {
+      window.ethereum.on("accountsChanged", (chainId) => {
+        this.resetConnection();
+        this.updateAccount();
       });
 
-      window.ethereum.on('accountsChanged', (chainId) => {
-        this.connected = false
-        this.updateAccount()
+      window.ethereum.on("chainChanged", (chainId) => {
+        this.resetConnection();
+        this.checkState();
       });
     },
-    backendAvailable: function() {
-      return typeof(window.ethereum) !== 'undefined'
+    resetConnection: function () {
+      this.connected = false;
+      this.pendingConnection = false;
+      this.stopRequests = false;
     },
-    validNetwork: function() {
-      return  window.ethereum.chainId === '0x2710'
+    cancelAutoUpdate: function () {
+      clearIntervalAsync(this.timer);
     },
-    hasAccounts: function() {
-      return this.accounts.length > 0
+    backendAvailable: function () {
+      return typeof window.ethereum !== "undefined";
     },
-    hasActiveAccount: function() {
-      return this.activeAccount !== ""
+    validNetwork: function () {
+      return window.ethereum.chainId === "0x2710";
     },
-    showError: function() {
-      return this.errorMessage !== ""
+    hasAccounts: function () {
+      return this.accounts.length > 0;
     },
-    getBCHBalance: async function() {
-      return web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount));
+    hasActiveAccount: function () {
+      return this.activeAccount !== "";
     },
-    smartScanURI: function(a) {
-      return "https://smartscan.cash/address/" + a
+    hasError: function () {
+      return this.errorMessage !== "";
     },
-    cancelAutoUpdate: function() {
-      clearIntervalAsync(this.timer)
-    },
-    updateAccount: async function() {
-      this.accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-      if (this.accounts.length > 0) {
-        this.activeAccount = this.accounts[0]
+    updateBalance: async function () {
+      if (this.connected) {
+        this.balance = web3js.utils.fromWei(
+          await web3js.eth.getBalance(this.activeAccount)
+        );
       }
-      this.balance = await this.getBCHBalance()
     },
-    checkState: async function() {
-      if (this.backendAvailable() && this.validNetwork()) {
-        if (this.connected !== true && this.pending_connection !== true) {
-          try {
-            this.pending_connection = true
+    smartScanURI: function (a) {
+      return "https://smartscan.cash/address/" + a;
+    },
+    unavailable: function () {
+      return !(this.backendAvailable() && this.validNetwork());
+    },
+    shouldAttemptConnection: function () {
+      if (this.stopRequests) {
+        return false;
+      }
 
-            await this.updateAccount()
+      if (this.connected) {
+        return false;
+      }
 
-            this.errorMessage = ""
-            this.connected = true
-          } catch (error) {
-            if (error.code === 4001) {
-              this.errorMessage = "Error: Access to accounts denied."
-              this.connected = false
-            }
-          }
-          this.pending_connection = false
-        }
+      if (this.pendingConnection) {
+        return false;
+      }
+
+      return true;
+    },
+    handleConnected: function () {
+      this.errorMessage = "";
+      this.connected = true;
+      this.pendingConnection = false;
+    },
+    handleConnectionFailed: function (error) {
+      this.connected = false;
+      this.pendingConnection = false;
+      this.stopRequests = true;
+
+      const errorPrefix = "Error " + error.code + ": ";
+
+      if (error.code === 4001) {
+        this.errorMessage = errorPrefix + "Access to accounts denied.";
       } else {
-        this.resetData()
-        this.errorMessage = "Please connect to the smartBCH network!"
+        this.errorMessage = errorPrefix + error.message;
       }
     },
-    resetData: function() {
-      this.connected = null
-      this.pending_connection = null
-      this.accounts = []
-      this.errorMessage = ""
-      this.activeAccount = ""
-      this.balance = 0
+    updateAccount: async function () {
+      if (this.shouldAttemptConnection()) {
+        this.pendingConnection = true;
+        try {
+          this.accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          this.handleConnected();
+
+          if (this.accounts.length > 0) {
+            this.activeAccount = this.accounts[0];
+            await this.updateBalance();
+          }
+        } catch (error) {
+          this.handleConnectionFailed(error);
+        }
+      }
     },
-  }
-}
+    checkState: async function () {
+      if (this.unavailable()) {
+        this.resetData();
+        this.errorMessage = "Please connect to the smartBCH network!";
+        return;
+      }
+
+      this.updateAccount();
+    },
+    resetData: function () {
+      this.connected = null;
+      this.pendingConnection = null;
+      this.accounts = [];
+      this.errorMessage = "";
+      this.activeAccount = "";
+      this.balance = 0;
+      this.stopRequests = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
-  h1, p {
-    margin-bottom: .5em;
-  }
-  .section {
-      padding: 1em;
-  }
+h1,
+p {
+  margin-bottom: 0.5em;
+}
+.section {
+  padding: 1em;
+}
 </style>
