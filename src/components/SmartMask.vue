@@ -3,7 +3,7 @@
 <template>
   <div class="section">
     <h1 class="text-center font-semibold">SmartMask</h1>
-    <p class="text-center" v-if="hasError()">{{ errorMessage }}</p>
+    <p class="text-center text-red-500" v-if="hasError()">{{ errorMessage }}</p>
     <div v-if="hasActiveAccount()">
       <p class="text-center mt-2">{{ balance }} BCH</p>
       <QR :account="activeAccount" :size="200" />
@@ -59,6 +59,7 @@ import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 
 const web3js = new Web3(window.ethereum);
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Debugging helpers.
 // window.web3js = web3js
@@ -76,6 +77,7 @@ export default {
       balance: 0,
       stopRequests: false,
       timer: null,
+      bindingRetries: 0,
       bindingsAdded: false,
     };
   },
@@ -94,6 +96,7 @@ export default {
   methods: {
     addBindings: function () {
       if (!this.backendAvailable() || this.bindingsAdded) {
+        this.bindingRetries += 1;
         return;
       }
 
@@ -111,9 +114,7 @@ export default {
     },
     copyAccount: function () {
       const clipboardData =
-        event.clipboardData ||
         window.clipboardData ||
-        event.originalEvent?.clipboardData ||
         navigator.clipboard;
 
       clipboardData.writeText(this.activeAccount);
@@ -211,6 +212,12 @@ export default {
       if (this.unavailable()) {
         this.resetData();
         this.errorMessage = "Please connect to the smartBCH network!";
+
+        if (this.bindingRetries < 15) {
+          await delay(250);
+          this.checkState();
+        }
+
         return;
       }
 
