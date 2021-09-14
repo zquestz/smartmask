@@ -76,12 +76,14 @@ export default {
       balance: 0,
       stopRequests: false,
       timer: null,
+      bindingsAdded: false,
     };
+  },
+  created: async function () {
+    this.timer = setIntervalAsync(this.checkState, 5000);
   },
   mounted: async function () {
     await this.checkState();
-    this.addBindings();
-    this.timer = setIntervalAsync(this.checkState, 5000);
   },
   beforeDestroy: function () {
     this.cancelAutoUpdate();
@@ -91,6 +93,10 @@ export default {
   },
   methods: {
     addBindings: function () {
+      if (!this.backendAvailable() || this.bindingsAdded) {
+        return;
+      }
+
       window.ethereum.on("accountsChanged", (chainId) => {
         this.resetConnection();
         this.updateAccount();
@@ -100,6 +106,8 @@ export default {
         this.resetConnection();
         this.checkState();
       });
+
+      this.bindingsAdded = true;
     },
     copyAccount: function () {
       const clipboardData =
@@ -154,10 +162,6 @@ export default {
         return false;
       }
 
-      if (this.connected) {
-        return false;
-      }
-
       if (this.pendingConnection) {
         return false;
       }
@@ -185,6 +189,7 @@ export default {
     updateAccount: async function () {
       if (this.shouldAttemptConnection()) {
         this.pendingConnection = true;
+
         try {
           this.accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
@@ -201,6 +206,8 @@ export default {
       }
     },
     checkState: async function () {
+      this.addBindings();
+
       if (this.unavailable()) {
         this.resetData();
         this.errorMessage = "Please connect to the smartBCH network!";
