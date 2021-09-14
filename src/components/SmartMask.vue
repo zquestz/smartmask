@@ -47,9 +47,6 @@ export default {
   beforeDestroy: function() {
     this.cancelAutoUpdate();
   },
-  destroyed: function() {
-    this.cancelAutoUpdate();
-  },
   components: {
     QR,
   },
