@@ -17,6 +17,8 @@
 <script>
 import QR from './QR.vue'
 import Web3 from 'web3/dist/web3.min.js'
+import { setIntervalAsync } from 'set-interval-async/fixed'
+import { clearIntervalAsync } from 'set-interval-async'
 
 const web3js = new Web3(window.ethereum);
 
@@ -34,11 +36,19 @@ export default {
       errorMessage: "",
       activeAccount: "",
       balance: 0,
+      timer: null,
     };
   },
   created: async function() {
     await this.checkState()
+    this.timer = setIntervalAsync(this.updateAccount, 15000);
     this.addBindings()
+  },
+  beforeDestroy: function() {
+    this.cancelAutoUpdate();
+  },
+  destroyed: function() {
+    this.cancelAutoUpdate();
   },
   components: {
     QR,
@@ -73,6 +83,9 @@ export default {
     },
     smartScanURI: function(a) {
       return "https://smartscan.cash/address/" + a
+    },
+    cancelAutoUpdate: function() {
+      clearIntervalAsync(this.timer)
     },
     updateAccount: async function() {
       this.accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
