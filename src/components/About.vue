@@ -1,12 +1,19 @@
 <!--./src/components/About.vue -->
 
 <template>
-  <div class="section">
+  <div class="section max-w-xs m-auto">
     <h1 class="text-center font-semibold">About SmartMask</h1>
     <p class="text-center">
       A small web wallet to make the smartBCH experience more enjoyable.
     </p>
-    <p class="text-center">Version: {{ version }}</p>
+    <p class="text-center">
+      Version: {{ version }}
+      [<a
+        class="underline text-blue-500 hover:text-blue-700 active:text-blue-900"
+        href="https://github.com/zquestz/smartmask"
+        >Source</a
+        >]
+    </p>
   </div>
 </template>
 
