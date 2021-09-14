@@ -1,5 +1,5 @@
 <template>
-  <qrcode-vue :value="value" :size="size" level="H" class="m-4 mx-auto" />
+  <qrcode-vue :value="account" :size="size" level="H" class="m-4 mx-auto" />
 </template>
 
 <script>
@@ -7,12 +7,6 @@
 
 
   export default {
-    data() {
-      return {
-        value: this.account,
-        size: this.size,
-      }
-    },
     props: ["account", "size"],
     components: {
       QrcodeVue,

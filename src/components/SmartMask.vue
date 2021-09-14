@@ -4,36 +4,54 @@
   <div class="section">
     <h1 class="text-center font-semibold">SmartMask</h1>
     <p class="text-center" v-if="showError()">{{errorMessage}}</p>
-    <h2 class="text-center" v-if="hasAccounts()">Account</h2>
-    <div class="text-center" v-if="hasAccounts()">
-      <select class="inline-block w-64 overflow-ellipsis" v-model="activeAccount">
-        <option class="text-center" v-for="(account) in accounts" :key="account">{{ account }}</option>
-      </select>
+    <div v-if="hasAccounts()">
+      <div class="text-center overflow-hidden overflow-ellipsis">
+        <a class="text-blue-500" v-bind:href="smartScanURI(activeAccount)" target="_blank">{{ activeAccount }}</a>
+      </div>
+      <QR v-if="hasActiveAccount()" :account="activeAccount" :size="200" />
+      <p class="text-center mt-2">Balance: {{balance}} BCH</p>
     </div>
-    <QR v-if="this.hasActiveAccount()" :account="activeAccount" :size="200" />
   </div>
 </template>
 
 <script>
 import QR from './QR.vue'
+import Web3 from 'web3/dist/web3.min.js'
+
+const web3js = new Web3(window.ethereum);
+
+window.web3js = web3js
+window.Web3NoMeta = Web3
 
 export default {
   name: "SmartMask",
   data: function() {
     return {
       connected: null,
+      pending_connection: null,
       accounts: [],
       errorMessage: "",
       activeAccount: "",
+      balance: 0,
     };
   },
   created: async function() {
     await this.checkState()
+    this.addBindings()
   },
   components: {
     QR,
   },
   methods: {
+    addBindings: function() {
+      window.ethereum.on('chainChanged', (chainId) => {
+        this.checkState()
+      });
+
+      window.ethereum.on('accountsChanged', (chainId) => {
+        this.updateAccount()
+      });
+    },
     backendAvailable: function() {
       return typeof(window.ethereum) !== 'undefined'
     },
@@ -44,19 +62,33 @@ export default {
       return this.accounts.length > 0
     },
     hasActiveAccount: function() {
-      return this.activeAccount != ""
+      return this.activeAccount !== ""
     },
     showError: function() {
       return this.errorMessage !== ""
     },
+    getBCHBalance: async function() {
+      return web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount));
+    },
+    smartScanURI: function(a) {
+      return "https://smartscan.cash/address/" + a
+    },
+    updateAccount: async function() {
+      this.accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+      if (this.accounts.length > 0) {
+        this.activeAccount = this.accounts[0]
+      }
+      this.balance = await this.getBCHBalance()
+    },
     checkState: async function() {
       if (this.backendAvailable() && this.validNetwork()) {
-        if (this.connected !== true) {
+        if (this.connected !== true && this.pending_connection !== true) {
           try {
-            this.accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-            if (this.accounts.length > 0) {
-              this.activeAccount = this.accounts[0]
-            }
+            this.pending_connection = true
+
+            await this.updateAccount()
+
+            this.errorMessage = ""
             this.connected = true
           } catch (error) {
             if (error.code === 4001) {
@@ -64,6 +96,7 @@ export default {
               this.connected = false
             }
           }
+          this.pending_connection = false
         }
       } else {
         this.resetData()
@@ -72,9 +105,11 @@ export default {
     },
     resetData: function() {
       this.connected = null
+      this.pending_connection = null
       this.accounts = []
       this.errorMessage = ""
       this.activeAccount = ""
+      this.balance = 0
     },
   }
 }

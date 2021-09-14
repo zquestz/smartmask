@@ -8,7 +8,6 @@
 </template>
 
 <script type="text/javascript">
-import _ from 'web3/dist/web3.min.js'
 import NavBar from "./components/NavBar.vue";
 
 export default {
@@ -25,6 +24,8 @@ export default {
 
 <style>
   body {
+    width: 100vw;
+    min-width: 100vw;
     height: 100vh;
     min-height: 100vh;
   }
