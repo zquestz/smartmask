@@ -6,14 +6,17 @@
     <p class="text-center" v-if="showError()">{{errorMessage}}</p>
     <h2 class="text-center" v-if="hasAccounts()">Account</h2>
     <div class="text-center" v-if="hasAccounts()">
-      <select class="inline-block w-128" v-model="activeAccount">
-        <option class="text-center" v-for="(account, _) in accounts" :key="account">{{ account }}</option>
+      <select class="inline-block w-64 overflow-ellipsis" v-model="activeAccount">
+        <option class="text-center" v-for="(account) in accounts" :key="account">{{ account }}</option>
       </select>
     </div>
+    <QR v-if="this.hasActiveAccount()" :account="activeAccount" :size="200" />
   </div>
 </template>
 
 <script>
+import QR from './QR.vue'
+
 export default {
   name: "SmartMask",
   data: function() {
@@ -27,6 +30,9 @@ export default {
   created: async function() {
     await this.checkState()
   },
+  components: {
+    QR,
+  },
   methods: {
     backendAvailable: function() {
       return typeof(window.ethereum) !== 'undefined'
@@ -36,6 +42,9 @@ export default {
     },
     hasAccounts: function() {
       return this.accounts.length > 0
+    },
+    hasActiveAccount: function() {
+      return this.activeAccount != ""
     },
     showError: function() {
       return this.errorMessage !== ""
