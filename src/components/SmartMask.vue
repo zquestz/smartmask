@@ -41,7 +41,7 @@ export default {
   },
   created: async function() {
     await this.checkState()
-    this.timer = setIntervalAsync(this.checkState, 15000);
+    this.timer = setIntervalAsync(this.checkState, 5000);
     this.addBindings()
   },
   beforeDestroy: function() {
