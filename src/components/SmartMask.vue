@@ -53,10 +53,12 @@ export default {
   methods: {
     addBindings: function() {
       window.ethereum.on('chainChanged', (chainId) => {
+        this.connected = false
         this.checkState()
       });
 
       window.ethereum.on('accountsChanged', (chainId) => {
+        this.connected = false
         this.updateAccount()
       });
     },
