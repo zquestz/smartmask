@@ -2,7 +2,6 @@
 
 <template>
   <div class="section">
-    <h1 class="text-center font-semibold">Community</h1>
     <ul class="m-auto text-center mt-2 max-w-xs">
       <li class="mb-8">
         <img
