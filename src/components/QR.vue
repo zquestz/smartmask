@@ -3,6 +3,7 @@
     :value="account"
     :size="size"
     level="H"
+    render-as="svg"
     class="m-auto border bg-white rounded-lg border-gray-300 p-4"
   />
 </template>
