@@ -5,6 +5,26 @@
     <ul class="m-auto text-center mt-2 max-w-xs">
       <li class="mb-8">
         <img
+          @click="goToURI('https://smartbch.org/')"
+          class="cursor-pointer mx-auto mb-2"
+          src="/img/smartbch.png"
+          width="200"
+          height="47"
+        />
+        <a
+          class="
+            underline
+            text-blue-500
+            hover:text-blue-700
+            active:text-blue-900
+          "
+          href="https://smartbch.org/"
+          >smartbch.org</a
+        >
+        - Information about the main smartBCH project!
+      </li>
+      <li class="mb-8">
+        <img
           @click="goToURI('https://benswap.cash/')"
           class="cursor-pointer mx-auto mb-2"
           src="/img/benswap.png"
@@ -41,15 +61,15 @@
           href="https://coinflex.com/"
           >coinflex.com</a
         >
-        - Buy smartBCH.
+        - Buy smartBCH and switch between chains.
       </li>
       <li class="mb-8">
         <img
-          @click="goToURI('https://smartbch.org/')"
+          @click="goToURI('https://smartscan.cash/')"
           class="cursor-pointer mx-auto mb-2"
-          src="/img/smartbch.png"
+          src="/img/smartscan.png"
           width="200"
-          height="47"
+          height="53"
         />
         <a
           class="
@@ -58,10 +78,10 @@
             hover:text-blue-700
             active:text-blue-900
           "
-          href="https://smartbch.org/"
-          >smartbch.org</a
+          href="https://smartscan.cash/"
+          >smartscan.cash</a
         >
-        - Information about the main smartBCH project!
+        - The primary smartBCH explorer.
       </li>
       <li>
         <img

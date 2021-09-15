@@ -5,32 +5,23 @@
     <h1 class="text-center font-semibold">SmartMask</h1>
     <p class="text-center text-red-500" v-if="hasError()">{{ errorMessage }}</p>
     <div v-if="hasActiveAccount()">
+      <div
+        @click="copyTextToClipboard(activeAccount)"
+        class="
+          cursor-pointer
+          text-blue-500
+          hover:text-blue-700
+          text-center text-xs
+          whitespace-pre-wrap
+          font-mono
+          break-all
+        "
+      >
+        {{ activeAccount }}
+      </div>
       <p class="text-center mt-2">{{ balance }} BCH</p>
       <QR :account="activeAccount" :size="200" />
-      <div class="text-center overflow-hidden overflow-ellipsis">
-        <a
-          class="text-xs text-blue-500 active:text-blue-700 hover:text-blue-700"
-          v-bind:href="smartScanURI(activeAccount)"
-          >{{ activeAccount }}</a
-        ><br />
-      </div>
       <div class="m-3 text-center">
-        <button
-          @click="copyTextToClipboard(activeAccount)"
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-700
-            active:bg-blue-900
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
-        >
-          Copy
-        </button>
         <button
           @click="goToSmartScan()"
           class="
