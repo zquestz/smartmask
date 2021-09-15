@@ -81,13 +81,11 @@ export default {
       bindingsAdded: false,
     };
   },
-  created: async function () {
+  mounted: async function () {
+    this.checkState();
     this.timer = setIntervalAsync(this.checkState, 5000);
   },
-  mounted: async function () {
-    await this.checkState();
-  },
-  beforeDestroy: function () {
+  unmounted: function () {
     this.cancelAutoUpdate();
   },
   components: {
@@ -121,10 +119,8 @@ export default {
 
       try {
         var successful = document.execCommand("copy");
-        var msg = successful ? "successful" : "unsuccessful";
-        console.log("Fallback: Copying text command was " + msg);
       } catch (err) {
-        console.error("Fallback: Oops, unable to copy", err);
+        window.prompt("Copy to clipboard, then close the dialog", text);
       }
 
       document.body.removeChild(textArea);
@@ -134,14 +130,7 @@ export default {
         fallbackCopyTextToClipboard(text);
         return;
       }
-      navigator.clipboard.writeText(text).then(
-        function () {
-          console.log("Async: Copying to clipboard was successful!");
-        },
-        function (err) {
-          console.error("Async: Could not copy text: ", err);
-        }
-      );
+      navigator.clipboard.writeText(text);
     },
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
