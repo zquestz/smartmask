@@ -3,7 +3,7 @@
 <template>
   <div class="section">
     <ul class="m-auto text-center mt-2 max-w-xs">
-      <li class="mb-8">
+      <li class="mb-4 border rounded-lg p-2 py-6 border-gray-300">
         <img
           @click="goToURI('https://smartbch.org/')"
           class="cursor-pointer mx-auto mb-2"
@@ -11,6 +11,7 @@
           width="200"
           height="47"
         />
+        <p>Information about the main smartBCH project!</p>
         <a
           class="
             underline
@@ -21,9 +22,8 @@
           href="https://smartbch.org/"
           >smartbch.org</a
         >
-        - Information about the main smartBCH project!
       </li>
-      <li class="mb-8">
+      <li class="my-4 border rounded-lg p-2 py-6 border-gray-300">
         <img
           @click="goToURI('https://benswap.cash/')"
           class="cursor-pointer mx-auto mb-2"
@@ -31,6 +31,7 @@
           width="200"
           height="35"
         />
+        <p>The smartBCH DEX.</p>
         <a
           class="
             underline
@@ -41,9 +42,8 @@
           href="https://benswap.cash/"
           >benswap.cash</a
         >
-        - The smartBCH DEX.
       </li>
-      <li class="mb-8">
+      <li class="my-4 border rounded-lg p-2 py-6 border-gray-300">
         <img
           @click="goToURI('https://coinflex.com/')"
           class="cursor-pointer mx-auto mb-2"
@@ -51,6 +51,7 @@
           width="200"
           height="38"
         />
+        <p>Buy smartBCH and switch between chains.</p>
         <a
           class="
             underline
@@ -61,9 +62,8 @@
           href="https://coinflex.com/"
           >coinflex.com</a
         >
-        - Buy smartBCH and switch between chains.
       </li>
-      <li class="mb-8">
+      <li class="my-4 border rounded-lg p-2 py-6 border-gray-300">
         <img
           @click="goToURI('https://smartscan.cash/')"
           class="cursor-pointer mx-auto mb-2"
@@ -71,6 +71,7 @@
           width="200"
           height="53"
         />
+        <p>The primary smartBCH explorer.</p>
         <a
           class="
             underline
@@ -81,9 +82,8 @@
           href="https://smartscan.cash/"
           >smartscan.cash</a
         >
-        - The primary smartBCH explorer.
       </li>
-      <li>
+      <li class="mt-4 border rounded-lg p-2 py-6 border-gray-300">
         <img
           @click="goToURI('https://marketcap.cash/')"
           class="cursor-pointer mx-auto mb-2"
@@ -91,6 +91,7 @@
           width="200"
           height="22"
         />
+        <p>Price information for smartBCH tokens.</p>
         <a
           class="
             underline
@@ -101,7 +102,6 @@
           href="https://marketcap.cash/"
           >marketcap.cash</a
         >
-        - Price information for smartBCH tokens.
       </li>
     </ul>
   </div>

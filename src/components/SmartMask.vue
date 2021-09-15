@@ -6,12 +6,9 @@
     <p class="text-center text-red-500" v-if="hasError()">{{ errorMessage }}</p>
     <div v-if="hasActiveAccount()">
       <div
-        @click="copyTextToClipboard(activeAccount)"
         class="
-          cursor-pointer
-          text-blue-500
-          hover:text-blue-700
-          text-center text-xs
+          cursor-auto
+          text-blue-500 text-center text-xs
           whitespace-pre-wrap
           font-mono
           break-all
