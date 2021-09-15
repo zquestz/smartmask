@@ -51,7 +51,7 @@
           width="200"
           height="38"
         />
-        <p>Buy smartBCH and switch between chains.</p>
+        <p>Buy BCH and switch between chains.</p>
         <a
           class="
             underline
