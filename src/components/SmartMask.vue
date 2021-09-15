@@ -120,7 +120,7 @@ export default {
       try {
         var successful = document.execCommand("copy");
       } catch (err) {
-        window.prompt("Copy to clipboard, then close the dialog", text);
+        window.prompt("Copy to clipboard, then close the dialog.", text);
       }
 
       document.body.removeChild(textArea);
