@@ -2,7 +2,7 @@
 
 <template>
   <div class="section max-w-xs m-auto">
-    <h1 class="text-center font-semibold">About SmartMask</h1>
+    <h1 class="text-center font-semibold">SmartMask</h1>
     <p class="text-center">
       A small web wallet to make the smartBCH experience more enjoyable.
     </p>

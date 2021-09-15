@@ -3,7 +3,7 @@
     :value="account"
     :size="size"
     level="H"
-    class="m-auto border bg-white rounded-lg border-gray-300 p-2"
+    class="m-auto border bg-white rounded-lg border-gray-300 p-4"
   />
 </template>
 

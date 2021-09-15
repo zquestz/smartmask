@@ -2,7 +2,6 @@
 
 <template>
   <div class="section">
-    <h1 class="text-center font-semibold">SmartMask</h1>
     <p class="text-center text-red-500" v-if="hasError()">{{ errorMessage }}</p>
     <div v-if="hasActiveAccount()">
       <div
@@ -17,15 +16,14 @@
         {{ activeAccount }}
       </div>
       <p class="text-center mt-2">{{ balance }} BCH</p>
-      <QR :account="activeAccount" :size="200" />
+      <QR :account="activeAccount" :size="250" />
       <div class="m-3 text-center">
         <button
-          @click="goToSmartScan()"
           class="
             m-1
             bg-blue-500
-            hover:bg-blue-700
-            active:bg-blue-900
+            hover:bg-blue-600
+            active:bg-blue-700
             text-white
             font-bold
             py-2
@@ -33,7 +31,7 @@
             rounded
           "
         >
-          Explorer
+          Send Crypto
         </button>
       </div>
     </div>

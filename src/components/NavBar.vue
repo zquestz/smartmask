@@ -8,8 +8,7 @@
               mx-3
               text-sm
               font-semibold
-              active:text-blue-700
-              hover:text-blue-700
+              hover:text-blue-600
               text-white
             "
           >
@@ -22,8 +21,7 @@
               mx-3
               text-sm
               font-semibold
-              active:text-blue-700
-              hover:text-blue-700
+              hover:text-blue-600
               text-white
             "
           >
@@ -36,8 +34,7 @@
               mx-3
               text-sm
               font-semibold
-              active:text-blue-700
-              hover:text-blue-700
+              hover:text-blue-600
               text-white
             "
           >
