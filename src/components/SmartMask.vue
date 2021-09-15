@@ -15,7 +15,7 @@
       >
         {{ activeAccount }}
       </div>
-      <p class="text-center mt-2">{{ balance }} BCH</p>
+      <p class="text-center mt-2">{{ displayBalance }} BCH</p>
       <QR :account="activeAccount" :size="250" />
       <div class="m-3 text-center">
         <button
@@ -41,6 +41,7 @@
 <script>
 import QR from "./QR.vue";
 import Web3 from "web3/dist/web3.min.js";
+import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 
@@ -48,8 +49,8 @@ const web3js = new Web3("wss://smartbch-wss.greyh.at");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Debugging helpers.
-// window.web3js = web3js
-// window.Web3NoMeta = Web3
+window.web3js = web3js;
+window.Web3NoMeta = Web3;
 
 export default {
   name: "SmartMask",
@@ -61,6 +62,7 @@ export default {
       errorMessage: "",
       activeAccount: "",
       balance: 0,
+      displayBalance: 0,
       stopRequests: false,
       timer: null,
       bindingRetries: 0,
@@ -146,9 +148,10 @@ export default {
     },
     updateBalance: async function () {
       if (this.connected) {
-        this.balance = web3js.utils.fromWei(
-          await web3js.eth.getBalance(this.activeAccount)
+        this.balance = new Decimal(
+          web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
+        this.displayBalance = this.balance.toFixed(8);
         console.log(
           "Updated balance for " + this.activeAccount + " : " + this.balance
         );
@@ -232,6 +235,7 @@ export default {
       this.errorMessage = "";
       this.activeAccount = "";
       this.balance = 0;
+      this.displayBalance = 0;
       this.stopRequests = false;
     },
   },
