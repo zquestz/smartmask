@@ -15,7 +15,9 @@
       >
         {{ activeAccount }}
       </div>
-      <p class="text-center mt-2">{{ BCHBalance }} BCH</p>
+      <p class="text-center text-lg mt-2 font-semibold">
+        {{ BCHBalance(balance) }} BCH
+      </p>
       <QR :account="activeAccount" :size="250" />
       <div class="m-3 text-center">
         <button
@@ -62,7 +64,6 @@ export default {
       errorMessage: "",
       activeAccount: "",
       balance: 0,
-      BCHBalance: 0,
       stopRequests: false,
       timer: null,
       bindingRetries: 0,
@@ -120,6 +121,9 @@ export default {
       }
       navigator.clipboard.writeText(text);
     },
+    BCHBalance: function (bal) {
+      return parseFloat(bal.toFixed(8)).toString();
+    },
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
     },
@@ -151,7 +155,6 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
-        this.BCHBalance = this.balance.toFixed(8);
         console.log(
           "Updated balance for " + this.activeAccount + " : " + this.balance
         );
@@ -235,7 +238,6 @@ export default {
       this.errorMessage = "";
       this.activeAccount = "";
       this.balance = 0;
-      this.BCHBalance = 0;
       this.stopRequests = false;
     },
   },
