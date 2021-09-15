@@ -16,7 +16,7 @@
       </div>
       <div class="m-3 text-center">
         <button
-          @click="copyAccount()"
+          @click="copyTextToClipboard(activeAccount)"
           class="
             m-1
             bg-blue-500
@@ -58,7 +58,7 @@ import Web3 from "web3/dist/web3.min.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 
-const web3js = new Web3(window.ethereum);
+const web3js = new Web3("wss://smartbch-wss.greyh.at");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Debugging helpers.
@@ -112,12 +112,36 @@ export default {
 
       this.bindingsAdded = true;
     },
-    copyAccount: function () {
-      const clipboardData =
-        window.clipboardData ||
-        navigator.clipboard;
+    fallbackCopyTextToClipboard: function (text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
 
-      clipboardData.writeText(this.activeAccount);
+      try {
+        var successful = document.execCommand("copy");
+        var msg = successful ? "successful" : "unsuccessful";
+        console.log("Fallback: Copying text command was " + msg);
+      } catch (err) {
+        console.error("Fallback: Oops, unable to copy", err);
+      }
+
+      document.body.removeChild(textArea);
+    },
+    copyTextToClipboard: function (text) {
+      if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(
+        function () {
+          console.log("Async: Copying to clipboard was successful!");
+        },
+        function (err) {
+          console.error("Async: Could not copy text: ", err);
+        }
+      );
     },
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
@@ -149,6 +173,9 @@ export default {
       if (this.connected) {
         this.balance = web3js.utils.fromWei(
           await web3js.eth.getBalance(this.activeAccount)
+        );
+        console.log(
+          "Updated balance for " + this.activeAccount + " : " + this.balance
         );
       }
     },
