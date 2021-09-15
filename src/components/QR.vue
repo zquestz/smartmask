@@ -1,5 +1,10 @@
 <template>
-  <qrcode-vue :value="account" :size="size" level="H" class="m-4 mx-auto" />
+  <qrcode-vue
+    :value="account"
+    :size="size"
+    level="H"
+    class="m-auto border bg-white rounded-lg border-gray-300 p-2"
+  />
 </template>
 
 <script>

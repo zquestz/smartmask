@@ -3,7 +3,7 @@
 <template>
   <div class="section">
     <ul class="m-auto text-center mt-2 max-w-xs">
-      <li class="mb-4 border rounded-lg p-4 border-gray-300">
+      <li class="mb-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
           @click="goToURI('https://smartbch.org/')"
           class="cursor-pointer mx-auto mb-2"
@@ -23,7 +23,7 @@
           >smartbch.org</a
         >
       </li>
-      <li class="my-4 border rounded-lg p-4 border-gray-300">
+      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
           @click="goToURI('https://benswap.cash/')"
           class="cursor-pointer mx-auto mb-2"
@@ -43,7 +43,7 @@
           >benswap.cash</a
         >
       </li>
-      <li class="my-4 border rounded-lg p-4 border-gray-300">
+      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
           @click="goToURI('https://coinflex.com/')"
           class="cursor-pointer mx-auto mb-2"
@@ -63,7 +63,7 @@
           >coinflex.com</a
         >
       </li>
-      <li class="my-4 border rounded-lg p-4 border-gray-300">
+      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
           @click="goToURI('https://smartscan.cash/')"
           class="cursor-pointer mx-auto mb-2"
@@ -83,7 +83,7 @@
           >smartscan.cash</a
         >
       </li>
-      <li class="mt-4 border rounded-lg p-4 border-gray-300">
+      <li class="mt-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
           @click="goToURI('https://marketcap.cash/')"
           class="cursor-pointer mx-auto mb-2"
