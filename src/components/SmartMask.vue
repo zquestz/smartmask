@@ -15,7 +15,7 @@
       >
         {{ activeAccount }}
       </div>
-      <p class="text-center mt-2">{{ displayBalance }} BCH</p>
+      <p class="text-center mt-2">{{ BCHBalance }} BCH</p>
       <QR :account="activeAccount" :size="250" />
       <div class="m-3 text-center">
         <button
@@ -62,7 +62,7 @@ export default {
       errorMessage: "",
       activeAccount: "",
       balance: 0,
-      displayBalance: 0,
+      BCHBalance: 0,
       stopRequests: false,
       timer: null,
       bindingRetries: 0,
@@ -151,7 +151,7 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
-        this.displayBalance = this.balance.toFixed(8);
+        this.BCHBalance = this.balance.toFixed(8);
         console.log(
           "Updated balance for " + this.activeAccount + " : " + this.balance
         );
@@ -235,7 +235,7 @@ export default {
       this.errorMessage = "";
       this.activeAccount = "";
       this.balance = 0;
-      this.displayBalance = 0;
+      this.BCHBalance = 0;
       this.stopRequests = false;
     },
   },
