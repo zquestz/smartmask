@@ -64,7 +64,7 @@
             <div class="flex items-center">
               <div class="w-full">
                 <input
-                  class="field p-2 font-mono w-full outline-none"
+                  class="field p-2 font-mono w-full outline-none rounded-l"
                   type="text"
                   name="recipient"
                   id="recipient"
@@ -115,7 +115,7 @@
             <div class="flex items-center w-full min-w-full">
               <div class="w-full">
                 <input
-                  class="field p-2 font-mono w-full outline-none"
+                  class="field p-2 font-mono w-full outline-none rounded-l"
                   placeholder="0"
                   type="number"
                   name="amount"
