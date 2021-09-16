@@ -3,6 +3,7 @@
 <template>
   <div class="section">
     <p class="text-center text-red-500" v-if="hasError()">{{ errorMessage }}</p>
+    <p class="text-center text-blue-500" v-if="hasNotice()">{{ noticeMessage }}</p>
     <div v-if="hasActiveAccount()">
       <div
         class="
@@ -124,6 +125,7 @@ export default {
       pendingConnection: null,
       accounts: [],
       errorMessage: "",
+      noticeMessage: "",
       activeAccount: "",
       balance: 0,
       stopRequests: false,
@@ -227,6 +229,9 @@ export default {
     hasError: function () {
       return this.errorMessage !== "";
     },
+    hasNotice: function () {
+      return this.noticeMessage !== "";
+    },
     updateBalance: async function () {
       if (this.connected) {
         this.balance = new Decimal(
@@ -256,10 +261,12 @@ export default {
     },
     handleConnected: function () {
       this.errorMessage = "";
+      this.noticeMessage = "";
       this.connected = true;
       this.pendingConnection = false;
     },
     handleConnectionFailed: function (error) {
+      this.noticeMessage = "";
       this.connected = false;
       this.pendingConnection = false;
       this.stopRequests = true;
@@ -365,6 +372,7 @@ export default {
       this.pendingConnection = null;
       this.accounts = [];
       this.errorMessage = "";
+      this.noticeMessage = "";
       this.activeAccount = "";
       this.balance = 0;
       this.stopRequests = false;
