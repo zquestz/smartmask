@@ -1,47 +1,63 @@
 <!--./src/components/SmartMask.vue -->
 
 <template>
-  <div class="section">
-    <p class="text-center text-red-500" v-if="hasError()">{{ errorMessage }}</p>
-    <p class="text-center text-blue-500" v-if="hasNotice()">{{ noticeMessage }}</p>
+  <div class="section text-center">
+    <p class="text-red-500" v-if="hasError()">{{ errorMessage }}</p>
+    <p class="text-blue-500" v-if="hasNotice()">
+      {{ noticeMessage }}
+    </p>
     <div v-if="hasActiveAccount()">
-      <div
-        class="
-          cursor-auto
-          text-blue-500 text-center text-xs
-          whitespace-pre-wrap
-          font-mono
-          break-all
-        "
-      >
-        {{ activeAccount }}
-      </div>
-      <p class="text-center text-lg mt-2 font-semibold">
-        {{ BCHBalance(balance) }} BCH
-      </p>
+      <p class="text-lg mt-2 font-semibold">{{ BCHBalance(balance) }} BCH</p>
       <div v-if="isDepositView()">
         <QR :account="activeAccount" :size="250" />
-        <div class="m-3 text-center">
-          <button
-            @click="showWithdrawal()"
+        <div class="m-3">
+          <div class="uppercase text-sm">smartBCH Address</div>
+          <a
+            v-if="copySupported()"
+            @click="copyToClipboard(activeAccount)"
             class="
-              m-1
-              bg-blue-500
-              hover:bg-blue-600
-              active:bg-blue-700
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
+              break-all
+              font-mono
+              whitespace-pre-wrap
+              text-blue-500 text-xs
+              cursor-pointer
+              hover:text-blue-700
             "
           >
-            Send Crypto
-          </button>
+            {{ activeAccount }}
+          </a>
+          <a
+            v-if="!copySupported()"
+            class="
+              break-all
+              font-mono
+              whitespace-pre-wrap
+              text-blue-500 text-xs
+              hover:text-blue-700
+            "
+          >
+            {{ activeAccount }}
+          </a>
         </div>
+        <button
+          @click="showWithdrawal()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Send Crypto
+        </button>
       </div>
       <div v-if="isWithdrawaltView()">
-        <div class="max-w-xs m-auto text-center">
+        <div class="max-w-xs m-auto">
           <div class="field-group">
             <label class="field-label block mb-1" for="recipient"
               >- Recipient -</label
@@ -133,8 +149,12 @@ export default {
       bindingRetries: 0,
       bindingsAdded: false,
       currentView: "deposit",
-      attemptingRegistration: false,
+      attemptedRegistration: false,
+      noCopy: null,
     };
+  },
+  created: async function () {
+    this.noCopy = !navigator.clipboard;
   },
   mounted: async function () {
     this.checkState();
@@ -165,6 +185,9 @@ export default {
 
       this.bindingsAdded = true;
     },
+    copySupported: function () {
+      return this.noCopy !== true;
+    },
     isDepositView: function () {
       return this.currentView === "deposit";
     },
@@ -178,27 +201,16 @@ export default {
       this.currentView = "deposit";
     },
     sendAction: function () {},
-    fallbackCopyTextToClipboard: function (text) {
-      var textArea = document.createElement("textarea");
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-
-      try {
-        var successful = document.execCommand("copy");
-      } catch (err) {
-        window.prompt("Copy to clipboard, then close the dialog.", text);
-      }
-
-      document.body.removeChild(textArea);
-    },
-    copyTextToClipboard: function (text) {
-      if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
+    copyToClipboard: function (text) {
+      if (!this.copySupported) {
         return;
       }
+
       navigator.clipboard.writeText(text);
+    },
+    setNotice: function (text) {
+      this.noticeMessage = text;
+      this.noticeDate = Date.now();
     },
     BCHBalance: function (bal) {
       return parseFloat(bal.toFixed(8)).toString();
@@ -261,9 +273,14 @@ export default {
     },
     handleConnected: function () {
       this.errorMessage = "";
-      this.noticeMessage = "";
       this.connected = true;
       this.pendingConnection = false;
+
+      // Notifications must persist for at least 3 seconds.
+      if (Date.now() - this.noticeDate > 3000) {
+        this.noticeMessage = "";
+        this.noticeDate = 0;
+      }
     },
     handleConnectionFailed: function (error) {
       this.noticeMessage = "";
@@ -345,8 +362,8 @@ export default {
       if (this.unavailable()) {
         let success = false;
 
-        if (!this.attemptingRegistration) {
-          this.attemptingRegistration = true;
+        if (!this.attemptedRegistration) {
+          this.attemptedRegistration = true;
           success = await this.attemptMetaMaskProviderRegistration();
         }
 
@@ -372,11 +389,9 @@ export default {
       this.pendingConnection = null;
       this.accounts = [];
       this.errorMessage = "";
-      this.noticeMessage = "";
       this.activeAccount = "";
       this.balance = 0;
       this.stopRequests = false;
-      this.attemptingRegistration = false;
     },
   },
 };

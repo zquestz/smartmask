@@ -21,13 +21,3 @@ export default {
   },
 };
 </script>
-
-<style>
-body {
-  width: 100vw;
-  min-width: 100vw;
-  height: 100vh;
-  min-height: 100vh;
-  background-color: #eee;
-}
-</style>

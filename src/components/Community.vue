@@ -1,8 +1,8 @@
 <!--./src/components/Community.vue -->
 
 <template>
-  <div class="section">
-    <ul class="m-auto text-center mt-2 max-w-xs">
+  <div class="section m-4 text-center">
+    <ul class="m-auto mt-2 max-w-xs">
       <li class="mb-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
           @click="goToURI('https://smartbch.org/')"
@@ -11,7 +11,7 @@
           width="200"
           height="47"
         />
-        <p>Information about the main smartBCH project!</p>
+        <p class="mb-2">Information about the main smartBCH project!</p>
         <a
           class="
             underline
@@ -31,7 +31,7 @@
           width="200"
           height="35"
         />
-        <p>The smartBCH DEX.</p>
+        <p class="mb-2">The smartBCH DEX.</p>
         <a
           class="
             underline
@@ -51,7 +51,7 @@
           width="200"
           height="38"
         />
-        <p>Buy BCH and switch between chains.</p>
+        <p class="mb-2">Buy BCH and switch between chains.</p>
         <a
           class="
             underline
@@ -71,7 +71,7 @@
           width="200"
           height="53"
         />
-        <p>The primary smartBCH explorer.</p>
+        <p class="mb-2">The primary smartBCH explorer.</p>
         <a
           class="
             underline
@@ -91,7 +91,7 @@
           width="200"
           height="22"
         />
-        <p>Price information for smartBCH tokens.</p>
+        <p class="mb-2">Price information for smartBCH tokens.</p>
         <a
           class="
             underline
@@ -117,13 +117,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h1,
-p {
-  margin-bottom: 0.5em;
-}
-.section {
-  padding: 1em;
-}
-</style>
