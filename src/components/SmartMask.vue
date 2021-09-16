@@ -11,7 +11,7 @@
       <div v-if="isDepositView()">
         <QR :account="activeAccount" :size="250" />
         <div class="m-3">
-          <div class="uppercase text-sm">smartBCH Address</div>
+          <h3 class="uppercase text-sm">smartBCH Address</h3>
           <a
             v-if="copySupported()"
             @click="copyToClipboard(activeAccount)"
