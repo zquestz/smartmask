@@ -61,24 +61,99 @@
             <label class="field-label block mb-1" for="recipient"
               >- Recipient -</label
             >
-            <input
-              class="field p-2 font-mono w-full"
-              type="text"
-              name="recipient"
-              id="recipient"
-            />
+            <div class="flex items-center">
+              <div class="w-full">
+                <input
+                  class="field p-2 font-mono w-full outline-none"
+                  type="text"
+                  name="recipient"
+                  id="recipient"
+                />
+              </div>
+              <div>
+                <button
+                  @click="scanQR()"
+                  class="
+                    bg-blue-500
+                    hover:bg-blue-600
+                    active:bg-blue-700
+                    text-white
+                    font-bold
+                    py-2
+                    px-3
+                    rounded-r
+                  "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
           <div class="field-group my-6">
             <label class="field-label block mb-1" for="recipient"
               >- Amount -</label
             >
-            <input
-              class="field p-2 font-mono w-full"
-              placeholder="0"
-              type="number"
-              name="amount"
-              id="amount"
-            />
+            <div class="flex items-center w-full min-w-full">
+              <div class="w-full">
+                <input
+                  class="field p-2 font-mono w-full outline-none"
+                  placeholder="0"
+                  type="number"
+                  name="amount"
+                  id="amount"
+                />
+              </div>
+              <div>
+                <button
+                  @click="maxSend()"
+                  class="
+                    bg-blue-500
+                    hover:bg-blue-600
+                    active:bg-blue-700
+                    text-white
+                    font-bold
+                    py-2
+                    px-3
+                    rounded-r
+                    align-bottom
+                  "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
           <button
             @click="closeWithdrawal()"
@@ -92,6 +167,7 @@
               py-2
               px-4
               rounded
+              align-bottom
             "
           >
             Cancel
@@ -108,6 +184,7 @@
               py-2
               px-4
               rounded
+              align-bottom
             "
           >
             Send
@@ -200,6 +277,7 @@ export default {
       this.currentView = "deposit";
     },
     sendAction: function () {},
+    maxSend: function () {},
     copyToClipboard: function (text) {
       if (!this.copySupported) {
         return;
@@ -217,6 +295,7 @@ export default {
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
     },
+    scanQR: function () {},
     resetConnection: function () {
       this.connected = false;
       this.pendingConnection = false;
