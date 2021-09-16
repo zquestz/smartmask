@@ -62,18 +62,18 @@
               >- Recipient -</label
             >
             <input
-              class="field p-2"
+              class="field p-2 font-mono w-full"
               type="text"
               name="recipient"
               id="recipient"
             />
           </div>
-          <div class="field-group m-6">
+          <div class="field-group my-6">
             <label class="field-label block mb-1" for="recipient"
               >- Amount -</label
             >
             <input
-              class="field p-2"
+              class="field p-2 font-mono w-full"
               placeholder="0"
               type="number"
               name="amount"
