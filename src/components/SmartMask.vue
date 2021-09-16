@@ -20,24 +20,23 @@
               font-mono
               whitespace-pre-wrap
               text-blue-500 text-xs
-              cursor-pointer
               hover:text-blue-700
+              cursor-pointer
             "
           >
             {{ activeAccount }}
           </a>
-          <a
+          <p
             v-if="!copySupported()"
             class="
               break-all
               font-mono
               whitespace-pre-wrap
               text-blue-500 text-xs
-              hover:text-blue-700
             "
           >
             {{ activeAccount }}
-          </a>
+          </p>
         </div>
         <button
           @click="showWithdrawal()"
