@@ -18,23 +18,85 @@
       <p class="text-center text-lg mt-2 font-semibold">
         {{ BCHBalance(balance) }} BCH
       </p>
-      <QR :account="activeAccount" :size="250" />
-      <div class="m-3 text-center">
-        <button
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
-        >
-          Send Crypto
-        </button>
+      <div v-if="isDepositView()">
+        <QR :account="activeAccount" :size="250" />
+        <div class="m-3 text-center">
+          <button
+            @click="showWithdrawal()"
+            class="
+              m-1
+              bg-blue-500
+              hover:bg-blue-600
+              active:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+          >
+            Send Crypto
+          </button>
+        </div>
+      </div>
+      <div v-if="isWithdrawaltView()">
+        <div class="max-w-xs m-auto text-center">
+          <div class="field-group">
+            <label class="field-label block mb-1" for="recipient"
+              >- Recipient -</label
+            >
+            <input
+              class="field p-2"
+              type="text"
+              name="recipient"
+              id="recipient"
+            />
+          </div>
+          <div class="field-group m-6">
+            <label class="field-label block mb-1" for="recipient"
+              >- Amount -</label
+            >
+            <input
+              class="field p-2"
+              placeholder="0"
+              type="number"
+              name="amount"
+              id="amount"
+            />
+          </div>
+          <button
+            @click="closeWithdrawal()"
+            class="
+              m-1
+              bg-gray-500
+              hover:bg-blue-600
+              active:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+          >
+            Cancel
+          </button>
+          <button
+            @click="sendAction()"
+            class="
+              m-1
+              bg-blue-500
+              hover:bg-blue-600
+              active:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +130,8 @@ export default {
       timer: null,
       bindingRetries: 0,
       bindingsAdded: false,
+      currentView: "deposit",
+      attemptingRegistration: false,
     };
   },
   mounted: async function () {
@@ -99,6 +163,19 @@ export default {
 
       this.bindingsAdded = true;
     },
+    isDepositView: function () {
+      return this.currentView === "deposit";
+    },
+    isWithdrawaltView: function () {
+      return this.currentView === "withdrawal";
+    },
+    showWithdrawal: function () {
+      this.currentView = "withdrawal";
+    },
+    closeWithdrawal: function () {
+      this.currentView = "deposit";
+    },
+    sendAction: function () {},
     fallbackCopyTextToClipboard: function (text) {
       var textArea = document.createElement("textarea");
       textArea.value = text;
@@ -214,10 +291,62 @@ export default {
         }
       }
     },
+    smartBCHProvider: function () {
+      return {
+        chainId: "0x2710",
+        rpcUrls: [
+          "https://smartbch.greyh.at",
+          "https://smartbch.fountainhead.cash/mainnet",
+        ],
+        chainName: "smartBCH",
+        nativeCurrency: {
+          name: "Bitcoin Cash",
+          symbol: "BCH",
+          decimals: 18,
+        },
+        blockExplorerUrls: ["https://smartscan.cash"],
+        iconUrls: ["https://smartmask.greyh.at/img/smartbch_logo.png"],
+      };
+    },
+    attemptMetaMaskProviderRegistration: async function () {
+      try {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x2710" }],
+        });
+        return true;
+      } catch (switchError) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [this.smartBCHProvider()],
+            });
+
+            return true;
+          } catch (addError) {
+            return false;
+          }
+        }
+        return false;
+      }
+    },
     checkState: async function () {
       this.addBindings();
 
       if (this.unavailable()) {
+        let success = false;
+
+        if (!this.attemptingRegistration) {
+          this.attemptingRegistration = true;
+          success = await this.attemptMetaMaskProviderRegistration();
+        }
+
+        if (success) {
+          return;
+        }
+
         this.resetData();
         this.errorMessage = "Please connect to the smartBCH network!";
 
@@ -239,6 +368,7 @@ export default {
       this.activeAccount = "";
       this.balance = 0;
       this.stopRequests = false;
+      this.attemptingRegistration = false;
     },
   },
 };
