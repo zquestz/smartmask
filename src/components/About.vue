@@ -1,7 +1,7 @@
 <!--./src/components/About.vue -->
 
 <template>
-  <div class="section text-center max-w-xs m-auto mb-4">
+  <div class="section text-center max-w-xs m-auto mb-4 p-4">
     <h1 class="font-semibold mb-2">SmartMask</h1>
     <p class="mb-2">
       A small web wallet to make the smartBCH experience more enjoyable.
@@ -28,13 +28,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h1,
-p {
-  margin-bottom: 0.5em;
-}
-.section {
-  padding: 1em;
-}
-</style>

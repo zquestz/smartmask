@@ -1,13 +1,15 @@
 <!--./src/components/SmartMask.vue -->
 
 <template>
-  <div class="section text-center">
-    <p class="text-red-500" v-if="hasError()">{{ errorMessage }}</p>
-    <p class="text-blue-500" v-if="hasNotice()">
+  <div class="section text-center mb-4">
+    <p class="text-red-500 mb-2" v-if="hasError()">{{ errorMessage }}</p>
+    <p class="text-blue-500 mb-2" v-if="hasNotice()">
       {{ noticeMessage }}
     </p>
     <div v-if="hasActiveAccount()">
-      <p class="text-lg mt-2 font-semibold">{{ BCHBalance(balance) }} BCH</p>
+      <p class="text-lg mt-2 mb-2 font-semibold">
+        {{ BCHBalance(balance) }} BCH
+      </p>
       <div v-if="isDepositView()">
         <QR :account="activeAccount" :size="250" />
         <div class="m-3">
@@ -33,6 +35,7 @@
               font-mono
               whitespace-pre-wrap
               text-blue-500 text-xs
+              mb-2
             "
           >
             {{ activeAccount }}
@@ -474,13 +477,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h1,
-p {
-  margin-bottom: 0.5em;
-}
-.section {
-  padding: 1em;
-}
-</style>
