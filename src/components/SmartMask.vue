@@ -1,7 +1,7 @@
 <!--./src/components/SmartMask.vue -->
 
 <template>
-  <div class="section text-center mb-4">
+  <div class="section text-center m-4">
     <p class="text-red-500 mb-2" v-if="hasError()">{{ errorMessage }}</p>
     <p class="text-blue-500 mb-2" v-if="hasNotice()">
       {{ noticeMessage }}
