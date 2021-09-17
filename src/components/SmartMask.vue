@@ -205,7 +205,7 @@ import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 import { assetList } from "../assetList.js";
-import { each, map } from "lodash";
+import { each, map, reduce } from "lodash";
 import { BigNumber } from "bignumber.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
@@ -392,7 +392,12 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
-        this.tokenBalances = await this.getTokenBalances();
+        this.tokenBalances = reduce(await this.getTokenBalances(), function (result, value, key) {
+          if (value['balance'] > 0) {
+            result[key] = value
+          }
+          return result;
+        });
 
         console.log(
           "Updated balance for " + this.activeAccount + " : " + this.balance
