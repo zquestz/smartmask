@@ -321,9 +321,9 @@ export default {
       return Promise.all(promises);
     },
     convertValue: function (data, decimals) {
-      const convertedValue = new BigNumber(data)
+      const convertedValue = new BigNumber(new BigNumber(data)
         .dividedBy(new BigNumber(`1e${decimals}`))
-        .toFixed(decimals);
+        .toFixed(decimals));
       return convertedValue.toString();
     },
     copySupported: function () {
@@ -355,7 +355,7 @@ export default {
       this.noticeDate = Date.now();
     },
     BCHBalance: function (bal) {
-      return parseFloat(bal.toFixed(8)).toString();
+      return new BigNumber(bal.toFixed(8)).toString();
     },
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
