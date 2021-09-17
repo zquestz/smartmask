@@ -115,6 +115,7 @@
             <div class="flex items-center w-full min-w-full">
               <div class="w-full">
                 <input
+                  v-model="sendAmount"
                   class="field p-2 font-mono w-full outline-none rounded-l"
                   placeholder="0"
                   type="number"
@@ -193,7 +194,8 @@
       </div>
       <div v-if="isAssetsView()">
         <p class="text-lg mt-4 mb-2 font-semibold">
-          <img class="mx-auto mb-2" src="/img/bch-large.png"> {{ BCHBalance(balance) }} BCH
+          <img class="mx-auto mb-2" src="/img/bch-large.png" />
+          {{ BCHBalance(balance) }} BCH
         </p>
         <button
           @click="showWithdrawal()"
@@ -270,6 +272,7 @@ export default {
       noCopy: null,
       assetList: assetList,
       tokenBalances: {},
+      sendAmount: 0,
     };
   },
   created: async function () {
@@ -355,9 +358,11 @@ export default {
       return Promise.all(promises);
     },
     convertValue: function (data, decimals) {
-      const convertedValue = new BigNumber(new BigNumber(data)
-        .dividedBy(new BigNumber(`1e${decimals}`))
-        .toFixed(decimals));
+      const convertedValue = new BigNumber(
+        new BigNumber(data)
+          .dividedBy(new BigNumber(`1e${decimals}`))
+          .toFixed(decimals)
+      );
       return convertedValue.toString();
     },
     copySupported: function () {
@@ -379,13 +384,15 @@ export default {
       this.currentView = "deposit";
     },
     showAssets: function () {
-      this.currentView = "assets"
+      this.currentView = "assets";
     },
     goHome: function () {
       this.currentView = "assets";
     },
     sendAction: function () {},
-    maxSend: function () {},
+    maxSend: function () {
+      this.sendAmount = this.balance;
+    },
     copyToClipboard: function (text) {
       if (!this.copySupported) {
         return;
@@ -435,12 +442,15 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
-        this.tokenBalances = reduce(await this.getTokenBalances(), (result, value, key) => {
-          if (value['balance'] > 0) {
-            result[key] = value
+        this.tokenBalances = reduce(
+          await this.getTokenBalances(),
+          (result, value, key) => {
+            if (value["balance"] > 0) {
+              result[key] = value;
+            }
+            return result;
           }
-          return result;
-        });
+        );
 
         console.log(
           "Updated balance for " + this.activeAccount + " : " + this.balance
@@ -587,6 +597,7 @@ export default {
       this.balance = 0;
       this.stopRequests = false;
       this.tokenBalances = {};
+      this.sendAmount = 0;
     },
   },
 };
