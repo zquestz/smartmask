@@ -35,7 +35,14 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-  }
+  },
+  "0xe11829a7d5d8806bb36e118461a1012588fafd89": {
+    symbol: "SPICE",
+    name: "Spice",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+  },
 };
 
 export { assetList };
@@ -130,13 +137,6 @@ export { assetList };
 //     "name": "Shiba BCH",
 //     "symbol": "SHIBBCH",
 //     "telegram": "https://t.me/ShibaCashBCH"
-//   },
-//   "SPICE": {
-//     "address": "0xe11829a7d5d8806bb36e118461a1012588fafd89",
-//     "image": "https://marketcap.cash/spice.png",
-//     "name": "SPICE",
-//     "symbol": "SPICE",
-//     "websites": ["https://spicetoken.org/"]
 //   },
 //   "UATX": {
 //     "address": "0xffa2394b61d3de16538a2bbf3491297cc5a7c79a",
