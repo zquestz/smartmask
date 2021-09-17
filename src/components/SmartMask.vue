@@ -392,7 +392,7 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
-        this.tokenBalances = reduce(await this.getTokenBalances(), function (result, value, key) {
+        this.tokenBalances = reduce(await this.getTokenBalances(), (result, value, key) => {
           if (value['balance'] > 0) {
             result[key] = value
           }
