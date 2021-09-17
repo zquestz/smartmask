@@ -204,6 +204,7 @@ import Web3 from "web3/dist/web3.min.js";
 import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
+import { assetList } from "../assetList.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -230,6 +231,7 @@ export default {
       currentView: "deposit",
       attemptedRegistration: false,
       noCopy: null,
+      assetList: assetList,
     };
   },
   created: async function () {
