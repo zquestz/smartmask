@@ -64,6 +64,7 @@
             <div class="flex items-center">
               <div class="w-full">
                 <input
+                  v-model="sendTo"
                   class="field p-2 font-mono w-full outline-none rounded-l"
                   type="text"
                   name="recipient"
@@ -273,6 +274,7 @@ export default {
       assetList: assetList,
       tokenBalances: {},
       sendAmount: 0,
+      sendTo: "",
     };
   },
   created: async function () {
@@ -598,6 +600,7 @@ export default {
       this.stopRequests = false;
       this.tokenBalances = {};
       this.sendAmount = 0;
+      this.sendTo = "";
     },
   },
 };
