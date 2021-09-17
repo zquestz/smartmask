@@ -205,6 +205,8 @@ import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 import { assetList } from "../assetList.js";
+import { each, map } from "lodash";
+import { BigNumber } from "bignumber.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -212,6 +214,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // Debugging helpers.
 window.web3js = web3js;
 window.Web3NoMeta = Web3;
+window.assetList = assetList;
 
 export default {
   name: "SmartMask",
@@ -232,6 +235,7 @@ export default {
       attemptedRegistration: false,
       noCopy: null,
       assetList: assetList,
+      tokenBalances: {},
     };
   },
   created: async function () {
@@ -265,6 +269,62 @@ export default {
       });
 
       this.bindingsAdded = true;
+    },
+    getTokenBalances: async function () {
+      try {
+        const resp = await this.callMultiple(
+          map(this.assetList, (_, tokenAddress) => {
+            return {
+              to: tokenAddress,
+              data:
+                Web3.utils.sha3("balanceOf(address)").slice(0, 10) +
+                "000000000000000000000000" +
+                Web3.utils.stripHexPrefix(this.activeAccount),
+              returnType: "uint256",
+            };
+          })
+        );
+
+        var newBalances = {};
+
+        each(resp, (_, i) => {
+          const k = Object.keys(this.assetList)[i];
+          const asset = this.assetList[k];
+          asset.balance = this.convertValue(resp[i], asset.decimals);
+          newBalances[k] = asset;
+        });
+
+        return newBalances;
+      } catch (error) {
+        return null;
+      }
+    },
+    callMultiple: function (transactionConfigs) {
+      const batch = new web3js.eth.BatchRequest();
+      const promises = transactionConfigs.map((transactionConfig) => {
+        return new Promise((res, rej) => {
+          const req = web3js.eth.call.request(
+            transactionConfig,
+            (err, data) => {
+              if (err) {
+                rej(err);
+              } else {
+                res(data);
+              }
+            }
+          );
+          batch.add(req);
+        });
+      });
+
+      batch.execute();
+      return Promise.all(promises);
+    },
+    convertValue: function (data, decimals) {
+      const convertedValue = new BigNumber(data)
+        .dividedBy(new BigNumber(`1e${decimals}`))
+        .toFixed(decimals);
+      return convertedValue.toString();
     },
     copySupported: function () {
       return this.noCopy !== true;
@@ -332,9 +392,12 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
+        this.tokenBalances = await this.getTokenBalances();
+
         console.log(
           "Updated balance for " + this.activeAccount + " : " + this.balance
         );
+        console.log(JSON.stringify(this.tokenBalances));
       }
     },
     smartScanURI: function (a) {
@@ -391,7 +454,7 @@ export default {
 
           if (this.accounts.length > 0) {
             this.activeAccount = this.accounts[0];
-            await this.updateBalance();
+            this.updateBalance();
           }
         } catch (error) {
           this.handleConnectionFailed(error);
@@ -475,6 +538,7 @@ export default {
       this.activeAccount = "";
       this.balance = 0;
       this.stopRequests = false;
+      this.tokenBalances = {};
     },
   },
 };

@@ -7,8 +7,10 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "bignumber.js": "^9.0.1",
     "buffer": "^6.0.3",
     "decimal.js": "^10.3.1",
+    "lodash": "^4.17.21",
     "qrcode.vue": "^3.3.2",
     "set-interval-async": "^2.0.3",
     "vue": "^3.2.6",
