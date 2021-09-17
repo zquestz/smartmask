@@ -7,9 +7,6 @@
       {{ noticeMessage }}
     </p>
     <div v-if="hasActiveAccount()">
-      <p class="text-lg mt-2 mb-2 font-semibold">
-        {{ BCHBalance(balance) }} BCH
-      </p>
       <div v-if="isDepositView()">
         <QR :account="activeAccount" :size="250" />
         <div class="m-3">
@@ -42,7 +39,7 @@
           </p>
         </div>
         <button
-          @click="showWithdrawal()"
+          @click="goHome()"
           class="
             m-1
             bg-blue-500
@@ -55,7 +52,7 @@
             rounded
           "
         >
-          Send Crypto
+          Close
         </button>
       </div>
       <div v-if="isWithdrawaltView()">
@@ -159,7 +156,7 @@
             </div>
           </div>
           <button
-            @click="closeWithdrawal()"
+            @click="goHome()"
             class="
               m-1
               bg-gray-500
@@ -193,6 +190,43 @@
             Send
           </button>
         </div>
+      </div>
+      <div v-if="isAssetsView()">
+        <p class="text-lg mt-4 mb-2 font-semibold">
+          <img class="mx-auto mb-2" src="/img/bch-large.png"> {{ BCHBalance(balance) }} BCH
+        </p>
+        <button
+          @click="showWithdrawal()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Send
+        </button>
+        <button
+          @click="showDeposit()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Receive
+        </button>
       </div>
     </div>
   </div>
@@ -231,7 +265,7 @@ export default {
       timer: null,
       bindingRetries: 0,
       bindingsAdded: false,
-      currentView: "deposit",
+      currentView: "assets",
       attemptedRegistration: false,
       noCopy: null,
       assetList: assetList,
@@ -335,11 +369,20 @@ export default {
     isWithdrawaltView: function () {
       return this.currentView === "withdrawal";
     },
+    isAssetsView: function () {
+      return this.currentView === "assets";
+    },
     showWithdrawal: function () {
       this.currentView = "withdrawal";
     },
-    closeWithdrawal: function () {
+    showDeposit: function () {
       this.currentView = "deposit";
+    },
+    showAssets: function () {
+      this.currentView = "assets"
+    },
+    goHome: function () {
+      this.currentView = "assets";
     },
     sendAction: function () {},
     maxSend: function () {},
