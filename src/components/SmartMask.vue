@@ -230,7 +230,7 @@
         >
           Receive
         </button>
-        <h1 class="mb-4 mt-8 font-semibold">- Token Assets -</h1>
+        <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">- Token Assets -</h1>
         <div
           class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
           v-for="asset in tokenBalances"
@@ -312,15 +312,17 @@ export default {
         return;
       }
 
-      window.ethereum.on("accountsChanged", (chainId) => {
-        this.resetConnection();
-        this.updateAccount();
-      });
+      if (window.ethereum.isMetaMask) {
+        window.ethereum.on("accountsChanged", (chainId) => {
+          this.resetConnection();
+          this.updateAccount();
+        });
 
-      window.ethereum.on("chainChanged", (chainId) => {
-        this.resetConnection();
-        this.checkState();
-      });
+        window.ethereum.on("chainChanged", (chainId) => {
+          this.resetConnection();
+          this.checkState();
+        });
+      }
 
       this.bindingsAdded = true;
     },

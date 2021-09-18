@@ -137,13 +137,13 @@ const assetList = {
     balance: 0,
     address: "0x7DF65F158126898725f262378538B60db543C11A"
   },
-  "0x5a3bb59f34d60e9eb5643fb80c8d712275f6a96a": {
+  "0x5a3bB59F34D60E9EB5643Fb80C8D712275F6a96A": {
     symbol: "PHA",
     name: "Alpha",
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x5a3bb59f34d60e9eb5643fb80c8d712275f6a96a"
+    address: "0x5a3bB59F34D60E9EB5643Fb80C8D712275F6a96A"
   },
   "0x445B3712A09f8102Dd0c1ffb6B3b0dE4D3B643b7": {
     symbol: "WRS",
