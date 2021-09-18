@@ -7,6 +7,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x77CB87b57F54667978Eb1B199b28a0db8C8E1c0B"
   },
   "0x265bD28d79400D55a1665707Fa14A72978FA6043": {
     symbol: "CATS",
@@ -14,6 +15,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
+    address: "0x265bD28d79400D55a1665707Fa14A72978FA6043"
   },
   "0x675E1d6FcE8C7cC091aED06A68D079489450338a": {
     symbol: "ARG",
@@ -21,6 +23,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x675E1d6FcE8C7cC091aED06A68D079489450338a"
   },
   "0x7b2B3C5308ab5b2a1d9a94d20D35CCDf61e05b72": {
     symbol: "FLEXUSD",
@@ -28,6 +31,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x7b2B3C5308ab5b2a1d9a94d20D35CCDf61e05b72"
   },
   "0x98Dd7eC28FB43b3C4c770AE532417015fa939Dd3": {
     symbol: "FLEX",
@@ -35,6 +39,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x98Dd7eC28FB43b3C4c770AE532417015fa939Dd3"
   },
   "0xE11829A7D5d8806BB36E118461a1012588faFD89": {
     symbol: "SPICE",
@@ -42,6 +47,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0xE11829A7D5d8806BB36E118461a1012588faFD89"
   },
   "0xc70c7718C7f1CCd906534C2c4a76914173EC2c44": {
     symbol: "KNUTH",
@@ -49,6 +55,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0xc70c7718C7f1CCd906534C2c4a76914173EC2c44"
   },
   "0xFf3ed63bf8bC9303eA0A7E1215bA2f82D569799e": {
     symbol: "ORB",
@@ -56,6 +63,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0xFf3ed63bf8bC9303eA0A7E1215bA2f82D569799e"
   },
   "0x0D8b355f9CEDeB612f2df4B39CdD87059A244567": {
     symbol: "CANDYMAN",
@@ -63,6 +71,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
+    address: "0x0D8b355f9CEDeB612f2df4B39CdD87059A244567"
   },
   "0x252fd94f3Fb53D3D62F4FEc708501ACd59A57e52": {
     symbol: "HAM",
@@ -70,6 +79,7 @@ const assetList = {
     type: "SEP20",
     decimals: 8,
     balance: 0,
+    address: "0x252fd94f3Fb53D3D62F4FEc708501ACd59A57e52"
   },
   "0xB24D7763516bca9656779d760be9a32490f46E27": {
     symbol: "HODL",
@@ -77,6 +87,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0xB24D7763516bca9656779d760be9a32490f46E27"
   },
   "0xF2d4D9c65C2d1080ac9e1895F6a32045741831Cd": {
     symbol: "HONK",
@@ -84,6 +95,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
+    address: "0xF2d4D9c65C2d1080ac9e1895F6a32045741831Cd"
   },
   "0x7eBeAdb95724a006aFaF2F1f051B13F4eBEBf711": {
     symbol: "KITTEN",
@@ -91,6 +103,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
+    address: "0x7eBeAdb95724a006aFaF2F1f051B13F4eBEBf711"
   },
   "0xc2100c9486B320B6db2Fc6D1f2BeAAB713fF069D": {
     symbol: "🌩️",
@@ -98,6 +111,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0xc2100c9486B320B6db2Fc6D1f2BeAAB713fF069D"
   },
   "0x481De06DCA0198844faA36FCa04Db364e5c2f86C": {
     symbol: "MAZE",
@@ -105,6 +119,7 @@ const assetList = {
     type: "SEP20",
     decimals: 6,
     balance: 0,
+    address: "0x481De06DCA0198844faA36FCa04Db364e5c2f86C"
   },
   "0x778C1c04D68c74FfdECBc0950d51033699c8Eb0B": {
     symbol: "MCASH",
@@ -112,6 +127,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x778C1c04D68c74FfdECBc0950d51033699c8Eb0B"
   },
   "0x7DF65F158126898725f262378538B60db543C11A": {
     symbol: "MGOT",
@@ -119,6 +135,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
+    address: "0x7DF65F158126898725f262378538B60db543C11A"
   },
   "0x5a3bb59f34d60e9eb5643fb80c8d712275f6a96a": {
     symbol: "PHA",
@@ -126,6 +143,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x5a3bb59f34d60e9eb5643fb80c8d712275f6a96a"
   },
   "0x445B3712A09f8102Dd0c1ffb6B3b0dE4D3B643b7": {
     symbol: "WRS",
@@ -133,6 +151,7 @@ const assetList = {
     type: "SEP20",
     decimals: 6,
     balance: 0,
+    address: "0x445B3712A09f8102Dd0c1ffb6B3b0dE4D3B643b7"
   },
   "0x2a886b947d5a8f0e09408C9069914Fa44C06ed7e": {
     symbol: "VANDALS",
@@ -140,6 +159,7 @@ const assetList = {
     type: "SEP20",
     decimals: 8,
     balance: 0,
+    address: "0x2a886b947d5a8f0e09408C9069914Fa44C06ed7e"
   },
   "0xFfA2394B61D3dE16538a2Bbf3491297Cc5a7C79a": {
     symbol: "UATX",
@@ -147,6 +167,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0xFfA2394B61D3dE16538a2Bbf3491297Cc5a7C79a"
   },
   "0x2f309b9D47b1Ce7f0ec30a26baB2dEaB8c4ea5E9": {
     symbol: "SHIBBCH",
@@ -154,6 +175,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x2f309b9D47b1Ce7f0ec30a26baB2dEaB8c4ea5E9"
   },
   "0x80453ACDfE0073D6743B27D72e06F48777EeAd80": {
     symbol: "ZOMBIE",
@@ -161,6 +183,7 @@ const assetList = {
     type: "SEP20",
     decimals: 0,
     balance: 0,
+    address: "0x80453ACDfE0073D6743B27D72e06F48777EeAd80"
   },
   "0x9288df32951386A8254aEaF80a66B78cCaf75b82": {
     symbol: "sBUSD",
@@ -168,6 +191,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
+    address: "0x9288df32951386A8254aEaF80a66B78cCaf75b82"
   },
   "0x8f66C730e383Bb412a9a3cB58178BAb2f432d194": {
     symbol: "sVNT",
@@ -175,6 +199,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
+    address: "0x8f66C730e383Bb412a9a3cB58178BAb2f432d194"
   },
 };
 

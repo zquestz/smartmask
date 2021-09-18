@@ -195,7 +195,7 @@
       </div>
       <div v-if="isAssetsView()">
         <p class="text-lg mt-4 mb-2 font-semibold">
-          <img class="mx-auto mb-2" src="/img/bch-large.png" />
+          <img class="mx-auto mb-2 w-16" src="/img/bch.svg" />
           {{ BCHBalance(balance) }} BCH
         </p>
         <button
@@ -230,6 +230,21 @@
         >
           Receive
         </button>
+        <h1 class="mb-4 mt-8 font-semibold">- Token Assets -</h1>
+        <div
+          class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
+          v-for="asset in tokenBalances"
+          v-bind:key="asset.balance"
+        >
+          <div class="flex-none">
+            <img class="m-2 w-8" :src="assetIcon(asset.address)" />
+          </div>
+          <div
+            class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
+          >
+            {{ assetBalanceFormatter(asset.balance) }} {{ asset.symbol }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -242,7 +257,7 @@ import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 import { assetList } from "../assetList.js";
-import { each, map, reduce } from "lodash";
+import { each, map, sortBy, reverse } from "lodash";
 import { BigNumber } from "bignumber.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
@@ -272,7 +287,7 @@ export default {
       attemptedRegistration: false,
       noCopy: null,
       assetList: assetList,
-      tokenBalances: {},
+      tokenBalances: [],
       sendAmount: 0,
       sendTo: "",
     };
@@ -324,13 +339,13 @@ export default {
           })
         );
 
-        var newBalances = {};
+        var newBalances = [];
 
         each(resp, (_, i) => {
           const k = Object.keys(this.assetList)[i];
           const asset = this.assetList[k];
           asset.balance = this.convertValue(resp[i], asset.decimals);
-          newBalances[k] = asset;
+          newBalances.push(asset);
         });
 
         return newBalances;
@@ -367,6 +382,9 @@ export default {
       );
       return convertedValue.toString();
     },
+    assetIcon: function (address) {
+      return "/img/assets/" + address + ".png";
+    },
     copySupported: function () {
       return this.noCopy !== true;
     },
@@ -389,7 +407,10 @@ export default {
       this.currentView = "assets";
     },
     goHome: function () {
-      this.currentView = "assets";
+      this.showAssets();
+    },
+    assetBalanceFormatter: function (bal) {
+      return new BigNumber(new BigNumber(bal).toFixed(10)).toString();
     },
     sendAction: function () {},
     maxSend: function () {
@@ -444,20 +465,18 @@ export default {
         this.balance = new Decimal(
           web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
         );
-        this.tokenBalances = reduce(
-          await this.getTokenBalances(),
-          (result, value, key) => {
-            if (value["balance"] > 0) {
-              result[key] = value;
-            }
-            return result;
-          }
-        );
 
-        console.log(
-          "Updated balance for " + this.activeAccount + " : " + this.balance
-        );
-        console.log(JSON.stringify(this.tokenBalances));
+        var pendingBalances = [];
+
+        each(await this.getTokenBalances(), (v) => {
+          if (v.balance > 0) {
+            pendingBalances.push(v);
+          }
+        });
+
+        this.tokenBalances = reverse(sortBy(pendingBalances, ["balance"]));
+
+        console.log("Refreshing balance for " + this.activeAccount);
       }
     },
     smartScanURI: function (a) {
