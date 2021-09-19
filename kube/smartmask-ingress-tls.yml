@@ -10,6 +10,7 @@ spec:
   tls:
   - hosts:
     - smartmask.greyh.at
+    - smartmask.cash
     secretName: smartmask-tls
   defaultBackend:
     service:
@@ -18,6 +19,16 @@ spec:
         number: 164
   rules:
   - host: smartmask.greyh.at
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: smartmask
+            port:
+              number: 164
+  - host: smartmask.cash
     http:
       paths:
       - path: /
