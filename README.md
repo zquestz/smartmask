@@ -1,6 +1,14 @@
 # SmartMask
 
 A small web based smartBCH wallet powered by MetaMask.
+https://smartmask.cash
+
+Adding Assets/Tokens
+--------------------
+- Edit `assetList.js` to add your token.
+- Add an icon for your token in `/public/img/tokens/`.
+- Make sure to use checksummed addresses.
+- Profit!
 
 Build & Run the Docker Image
 ----------------------------
