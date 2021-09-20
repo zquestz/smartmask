@@ -284,6 +284,9 @@ import { clearIntervalAsync } from "set-interval-async";
 import { assetList } from "../assetList.js";
 import { each, map, sortBy, reverse } from "lodash";
 import { BigNumber } from "bignumber.js";
+import QrScanner from "qr-scanner";
+
+QrScanner.WORKER_PATH = "/js/qr-scanner-worker.min.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -292,6 +295,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 window.web3js = web3js;
 window.Web3NoMeta = Web3;
 window.assetList = assetList;
+window.QrScanner = QrScanner;
 
 // For SEP20 transfers.
 const minABI = [
