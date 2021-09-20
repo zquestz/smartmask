@@ -58,6 +58,29 @@
       <div v-if="isWithdrawaltView()">
         <div class="max-w-xs m-auto">
           <div class="field-group">
+            <img class="w-16 block mb-2 mx-auto" :src="assetImage()" />
+            <select
+              v-model="sendContract"
+              class="
+                field
+                p-2
+                font-mono
+                w-full
+                outline-none
+                rounded-l
+                mb-4
+                bg-white
+              "
+            >
+              <option value="">BCH - {{ balance }}</option>
+              <option
+                v-for="asset in tokenBalances"
+                v-bind:value="asset.address"
+                v-bind:key="asset.address"
+              >
+                {{ asset.symbol }} - {{ asset.balance }}
+              </option>
+            </select>
             <label class="field-label block mb-1" for="recipient"
               >- Recipient -</label
             >
@@ -230,7 +253,9 @@
         >
           Receive
         </button>
-        <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">- Token Assets -</h1>
+        <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">
+          - Token Assets -
+        </h1>
         <div
           class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
           v-for="asset in tokenBalances"
@@ -268,6 +293,31 @@ window.web3js = web3js;
 window.Web3NoMeta = Web3;
 window.assetList = assetList;
 
+// For SEP20 transfers.
+const minABI = [
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_to",
+        type: "address",
+      },
+      {
+        name: "_value",
+        type: "uint256",
+      },
+    ],
+    name: "transfer",
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+      },
+    ],
+    type: "function",
+  },
+];
+
 export default {
   name: "SmartMask",
   data: function () {
@@ -278,7 +328,7 @@ export default {
       errorMessage: "",
       noticeMessage: "",
       activeAccount: "",
-      balance: 0,
+      balance: new BigNumber(0),
       stopRequests: false,
       timer: null,
       bindingRetries: 0,
@@ -288,7 +338,8 @@ export default {
       noCopy: null,
       assetList: assetList,
       tokenBalances: [],
-      sendAmount: 0,
+      sendAmount: new BigNumber(0),
+      sendContract: "",
       sendTo: "",
     };
   },
@@ -325,6 +376,16 @@ export default {
       }
 
       this.bindingsAdded = true;
+    },
+    assetImage: function () {
+      if (this.sendingBCH()) {
+        return "/img/bch.svg";
+      } else {
+        return "/img/assets/" + this.sendContract + ".png";
+      }
+    },
+    sendingBCH: function () {
+      return this.sendContract === "";
     },
     getTokenBalances: async function () {
       try {
@@ -400,13 +461,23 @@ export default {
       return this.currentView === "assets";
     },
     showWithdrawal: function () {
+      this.resetNotices();
+
       this.currentView = "withdrawal";
     },
     showDeposit: function () {
+      this.resetNotices();
+
       this.currentView = "deposit";
     },
     showAssets: function () {
+      this.resetNotices();
+
       this.currentView = "assets";
+    },
+    resetNotices: function () {
+      this.errorMessage = "";
+      this.noticeMessage = "";
     },
     goHome: function () {
       this.showAssets();
@@ -414,9 +485,107 @@ export default {
     assetBalanceFormatter: function (bal) {
       return new BigNumber(new BigNumber(bal).toFixed(10)).toString();
     },
-    sendAction: function () {},
+    sendAction: function () {
+      if (this.validateSend()) {
+        this.resetNotices();
+        if (this.sendingBCH()) {
+          this.sendBCH();
+        } else {
+          this.sendAsset();
+        }
+      }
+    },
+    sendAsset: function () {
+      const asset = this.assetList[this.sendContract];
+      const contract = new web3js.eth.Contract(minABI, this.sendContract);
+      const gasPrice = web3js.utils.toWei("0.00000000105", "ether");
+      const decimals = web3js.utils.toBN(asset.decimals);
+      const amount = new BigNumber(this.sendAmount);
+      const value = amount.multipliedBy(web3js.utils.toBN(10).pow(decimals));
+
+      window.ethereum
+        .request({
+          method: "eth_sendTransaction",
+          params: [
+            {
+              from: this.activeAccount,
+              to: web3js.utils.toChecksumAddress(this.sendContract),
+              value: web3js.utils.toHex(0),
+              gasPrice: web3js.utils.toHex(gasPrice),
+              data: contract.methods
+                .transfer(this.sendTo, web3js.utils.toBN(value))
+                .encodeABI(),
+            },
+          ],
+        })
+        .then((txHash) => console.log(txHash))
+        .catch((error) => console.log(error));
+    },
+    sendBCH: function () {
+      let value = web3js.utils.toWei(this.sendAmount.toString(), "ether");
+      const gasPrice = web3js.utils.toWei("0.00000000105", "ether");
+      const gas = "21000";
+
+      // Send max case, deduct the gas from the value.
+      if (this.sendAmount.toString() === this.balance.toString()) {
+        value =
+          new BigNumber(value) - new BigNumber(gas) * new BigNumber(gasPrice);
+
+        if (value < 0) {
+          value = "0";
+        } else {
+          value = value.toString();
+        }
+      }
+
+      window.ethereum
+        .request({
+          method: "eth_sendTransaction",
+          params: [
+            {
+              from: this.activeAccount,
+              to: web3js.utils.toChecksumAddress(this.sendTo),
+              value: web3js.utils.toHex(value),
+              gas: web3js.utils.toHex(gas),
+              gasPrice: web3js.utils.toHex(gasPrice),
+            },
+          ],
+        })
+        .then((txHash) => console.log(txHash))
+        .catch((error) => console.log(error));
+    },
+    validateSend: function () {
+      try {
+        const address = web3js.utils.toChecksumAddress(this.sendTo);
+      } catch (e) {
+        this.errorMessage = "Invalid Recipient Address";
+        return false;
+      }
+
+      console.log(this.sendContract);
+      console.log(this.assetList[this.sendContract]);
+
+      if (this.sendingBCH() && this.sendAmount > this.balance) {
+        this.errorMessage = "Invalid amount";
+        return false;
+      }
+
+      if (
+        !this.sendingBCH() &&
+        this.sendAmount > this.assetList[this.sendContract].balance
+      ) {
+        this.errorMessage = "Invalid amount";
+        return false;
+      }
+
+      return true;
+    },
     maxSend: function () {
-      this.sendAmount = this.balance;
+      if (this.sendingBCH()) {
+        this.sendAmount = this.balance;
+      } else {
+        this.sendAmount = this.assetList[this.sendContract].balance;
+      }
     },
     copyToClipboard: function (text) {
       if (!this.copySupported) {
@@ -428,6 +597,10 @@ export default {
     setNotice: function (text) {
       this.noticeMessage = text;
       this.noticeDate = Date.now();
+    },
+    setError: function (text) {
+      this.errorMessage = text;
+      this.errorDate = Date.now();
     },
     BCHBalance: function (bal) {
       return new BigNumber(bal.toFixed(8)).toString();
@@ -499,7 +672,6 @@ export default {
       return true;
     },
     handleConnected: function () {
-      this.errorMessage = "";
       this.connected = true;
       this.pendingConnection = false;
 
@@ -508,7 +680,14 @@ export default {
         this.noticeMessage = "";
         this.noticeDate = 0;
       }
+
+      // Notifications must persist for at least 3 seconds.
+      if (Date.now() - this.errorDate > 3000) {
+        this.errorMessage = "";
+        this.errorDate = 0;
+      }
     },
+    formatError: function (err) {},
     handleConnectionFailed: function (error) {
       this.noticeMessage = "";
       this.connected = false;
@@ -518,9 +697,9 @@ export default {
       const errorPrefix = "Error " + error.code + ": ";
 
       if (error.code === 4001) {
-        this.errorMessage = errorPrefix + "Access to accounts denied.";
+        this.setError(errorPrefix + "Access to accounts denied.");
       } else {
-        this.errorMessage = errorPrefix + error.message;
+        this.setError(errorPrefix + error.message);
       }
     },
     updateAccount: async function () {
@@ -599,7 +778,7 @@ export default {
         }
 
         this.resetData();
-        this.errorMessage = "Please connect to the smartBCH network!";
+        this.setError("Please connect to the smartBCH network!");
 
         if (this.bindingRetries < 15) {
           await delay(250);
@@ -617,11 +796,12 @@ export default {
       this.accounts = [];
       this.errorMessage = "";
       this.activeAccount = "";
-      this.balance = 0;
+      this.balance = new BigNumber(0);
       this.stopRequests = false;
       this.tokenBalances = {};
-      this.sendAmount = 0;
+      this.sendAmount = new BigNumber(0);
       this.sendTo = "";
+      this.sendContract = "";
     },
   },
 };
