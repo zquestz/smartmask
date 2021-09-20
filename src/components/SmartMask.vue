@@ -271,6 +271,26 @@
           </div>
         </div>
       </div>
+      <div v-if="isScanView()">
+        <video id="scan"></video>
+
+        <button
+          @click="showWithdrawal()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Close
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -342,6 +362,7 @@ export default {
       noCopy: null,
       assetList: assetList,
       tokenBalances: [],
+      scanResult = "",
       sendAmount: new BigNumber(0),
       sendContract: "",
       sendTo: "",
@@ -464,6 +485,9 @@ export default {
     isAssetsView: function () {
       return this.currentView === "assets";
     },
+    isScanView: function () {
+      return this.currentView === "scan";
+    },
     showWithdrawal: function () {
       this.resetNotices();
 
@@ -478,6 +502,16 @@ export default {
       this.resetNotices();
 
       this.currentView = "assets";
+    },
+    showScan: async function () {
+      this.resetNotices();
+
+      this.currentView = "scan"
+            await delay(1000)
+
+      const videoElem = document.getElementById('scan')
+      const qrScanner = new QrScanner(videoElem, result => this.scanResult = result);
+      qrScanner.start()
     },
     resetNotices: function () {
       this.errorMessage = "";
@@ -612,7 +646,9 @@ export default {
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
     },
-    scanQR: function () {},
+    scanQR: function () {
+      this.showScan();
+    },
     resetConnection: function () {
       this.connected = false;
       this.pendingConnection = false;
@@ -803,6 +839,7 @@ export default {
       this.balance = new BigNumber(0);
       this.stopRequests = false;
       this.tokenBalances = {};
+      this.scanResult = "";
       this.sendAmount = new BigNumber(0);
       this.sendTo = "";
       this.sendContract = "";
