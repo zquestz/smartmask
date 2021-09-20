@@ -362,7 +362,7 @@ export default {
       noCopy: null,
       assetList: assetList,
       tokenBalances: [],
-      scanResult = "",
+      scanResult: "",
       sendAmount: new BigNumber(0),
       sendContract: "",
       sendTo: "",
@@ -512,6 +512,9 @@ export default {
       const videoElem = document.getElementById('scan')
       const qrScanner = new QrScanner(videoElem, result => this.scanResult = result);
       qrScanner.start()
+    },
+    stopScan: function () {
+      qrScanner.stop();
     },
     resetNotices: function () {
       this.errorMessage = "";
