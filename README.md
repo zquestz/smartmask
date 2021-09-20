@@ -6,7 +6,7 @@ https://smartmask.cash
 Adding Assets/Tokens
 --------------------
 - Edit `assetList.js` to add your token.
-- Add an icon for your token in `/public/img/tokens/`.
+- Add an icon for your asset in `/public/img/assets/`.
 - Make sure to use checksummed addresses.
 - Profit!
 
