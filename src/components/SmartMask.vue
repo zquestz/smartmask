@@ -96,7 +96,7 @@
               </div>
               <div>
                 <button
-                  @click="scanQR()"
+                  @click="paste()"
                   class="
                     bg-blue-500
                     hover:bg-blue-600
@@ -119,13 +119,7 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
                     />
                   </svg>
                 </button>
@@ -562,7 +556,7 @@ export default {
       try {
         const address = web3js.utils.toChecksumAddress(this.sendTo);
       } catch (e) {
-        this.errorMessage = "Invalid Recipient Address";
+        this.setError("Invalid Recipient Address");
         return false;
       }
 
@@ -570,7 +564,7 @@ export default {
       console.log(this.assetList[this.sendContract]);
 
       if (this.sendingBCH() && this.sendAmount > this.balance) {
-        this.errorMessage = "Invalid amount";
+        this.setError("Invalid amount");
         return false;
       }
 
@@ -578,7 +572,7 @@ export default {
         !this.sendingBCH() &&
         this.sendAmount > this.assetList[this.sendContract].balance
       ) {
-        this.errorMessage = "Invalid amount";
+        this.setError("Invalid amount");
         return false;
       }
 
@@ -613,6 +607,13 @@ export default {
       location.href = this.smartScanURI(this.activeAccount);
     },
     scanQR: function () {},
+    paste: async function () {
+      if (this.copySupported()) {
+        this.sendTo = await navigator.clipboard.readText();
+      } else {
+        console.log("Clipboard not available")
+      }
+    },
     resetConnection: function () {
       this.connected = false;
       this.pendingConnection = false;
@@ -676,6 +677,11 @@ export default {
       return true;
     },
     handleConnected: function () {
+      // Fresh connections clear the notifications.
+      if (this.connected !== true) {
+        this.resetNotices();
+      }
+
       this.connected = true;
       this.pendingConnection = false;
 
@@ -685,7 +691,7 @@ export default {
         this.noticeDate = 0;
       }
 
-      // Notifications must persist for at least 3 seconds.
+      // Errors must persist for at least 3 seconds.
       if (Date.now() - this.errorDate > 3000) {
         this.errorMessage = "";
         this.errorDate = 0;
