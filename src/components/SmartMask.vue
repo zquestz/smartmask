@@ -745,7 +745,7 @@ export default {
           decimals: 18,
         },
         blockExplorerUrls: ["https://smartscan.cash"],
-        iconUrls: ["https://smartmask.greyh.at/img/smartbch_logo.png"],
+        iconUrls: ["https://smartmask.cash/img/smartbch_logo.png"],
       };
     },
     attemptMetaMaskProviderRegistration: async function () {
