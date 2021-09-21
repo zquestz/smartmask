@@ -201,6 +201,14 @@ const assetList = {
     balance: 0,
     address: "0x8f66C730e383Bb412a9a3cB58178BAb2f432d194"
   },
+  "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04": {
+    symbol: "WBCH",
+    name: "Wrapped BCH",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04"
+  },
 };
 
 export { assetList };
