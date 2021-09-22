@@ -253,7 +253,7 @@
         <div
           class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
           v-for="asset in tokenBalances"
-          v-bind:key="asset.balance"
+          v-bind:key="asset.address"
         >
           <div class="flex-none">
             <img class="m-2 w-8" :src="assetIcon(asset.address)" />
