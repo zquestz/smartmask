@@ -611,7 +611,7 @@ export default {
       if (this.copySupported()) {
         this.sendTo = await navigator.clipboard.readText();
       } else {
-        console.log("Clipboard not available")
+        console.log("Clipboard not available");
       }
     },
     resetConnection: function () {
@@ -654,7 +654,13 @@ export default {
           }
         });
 
-        this.tokenBalances = reverse(sortBy(pendingBalances, ["balance"]));
+        this.tokenBalances = reverse(
+          pendingBalances.sort(function (a, b) {
+            return new BigNumber(a.balance).gt(new BigNumber(b.balance))
+              ? 0
+              : -1;
+          })
+        );
 
         console.log("Refreshing balance for " + this.activeAccount);
       }
