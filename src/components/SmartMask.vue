@@ -96,7 +96,7 @@
               </div>
               <div>
                 <button
-                  @click="paste()"
+                  @click="showScan()"
                   class="
                     bg-blue-500
                     hover:bg-blue-600
@@ -119,7 +119,7 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                      d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"
                     />
                   </svg>
                 </button>
@@ -265,12 +265,32 @@
           </div>
         </div>
       </div>
+      <div v-if="isScanView()">
+        <QRScan :qrbox="200" :fps="10" :aspectRatio="1" @result="onScan" />
+        <button
+          @click="showWithdrawal()"
+          class="
+            m-2
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Close
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import QR from "./QR.vue";
+import QRScan from "./QRScan.vue";
 import Web3 from "web3/dist/web3.min.js";
 import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
@@ -278,9 +298,6 @@ import { clearIntervalAsync } from "set-interval-async";
 import { assetList } from "../assetList.js";
 import { each, map, sortBy, reverse } from "lodash";
 import { BigNumber } from "bignumber.js";
-import QrScanner from "qr-scanner";
-
-QrScanner.WORKER_PATH = "/js/qr-scanner-worker.min.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -289,7 +306,6 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 window.web3js = web3js;
 window.Web3NoMeta = Web3;
 window.assetList = assetList;
-window.QrScanner = QrScanner;
 
 // For SEP20 transfers.
 const minABI = [
@@ -353,8 +369,20 @@ export default {
   },
   components: {
     QR,
+    QRScan,
   },
   methods: {
+    onScan: function (result) {
+      try {
+        this.sendTo = web3js.utils.toChecksumAddress(this.parseScanResult(result));
+        this.showWithdrawal();
+      } catch (e) {
+        this.setError("Invalid Recipient Address: " + e.message);
+      }
+    },
+    parseScanResult: function (result) {
+      return result.replace("ethereum:", "");
+    },
     addBindings: function () {
       if (!this.backendAvailable() || this.bindingsAdded) {
         this.bindingRetries += 1;
@@ -458,6 +486,9 @@ export default {
     isAssetsView: function () {
       return this.currentView === "assets";
     },
+    isScanView: function () {
+      return this.currentView === "scan";
+    },
     showWithdrawal: function () {
       this.resetNotices();
 
@@ -472,6 +503,11 @@ export default {
       this.resetNotices();
 
       this.currentView = "assets";
+    },
+    showScan: function () {
+      this.resetNotices();
+
+      this.currentView = "scan";
     },
     resetNotices: function () {
       this.errorMessage = "";
@@ -560,9 +596,6 @@ export default {
         return false;
       }
 
-      console.log(this.sendContract);
-      console.log(this.assetList[this.sendContract]);
-
       if (this.sendingBCH() && this.sendAmount > this.balance) {
         this.setError("Invalid amount");
         return false;
@@ -606,7 +639,6 @@ export default {
     goToSmartScan: function () {
       location.href = this.smartScanURI(this.activeAccount);
     },
-    scanQR: function () {},
     paste: async function () {
       if (this.copySupported()) {
         this.sendTo = await navigator.clipboard.readText();
