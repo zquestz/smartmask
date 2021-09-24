@@ -8,36 +8,10 @@
     </p>
     <div v-if="hasActiveAccount()">
       <div v-if="isDepositView()">
-        <QR :account="activeAccount" :size="250" />
-        <div class="m-3">
-          <h3 class="uppercase text-sm">smartBCH Address</h3>
-          <a
-            v-if="copySupported()"
-            @click="copyToClipboard(activeAccount)"
-            class="
-              break-all
-              font-mono
-              whitespace-pre-wrap
-              text-blue-500 text-xs
-              hover:text-blue-700
-              cursor-pointer
-            "
-          >
-            {{ activeAccount }}
-          </a>
-          <p
-            v-if="!copySupported()"
-            class="
-              break-all
-              font-mono
-              whitespace-pre-wrap
-              text-blue-500 text-xs
-              mb-2
-            "
-          >
-            {{ activeAccount }}
-          </p>
-        </div>
+        <Deposit
+          :activeAccount="activeAccount"
+          :copySupported="copySupported()"
+        />
         <button
           @click="goHome()"
           class="
@@ -289,7 +263,7 @@
 </template>
 
 <script>
-import QR from "./QR.vue";
+import Deposit from "./Deposit.vue";
 import QRScan from "./QRScan.vue";
 import Web3 from "web3/dist/web3.min.js";
 import Decimal from "decimal.js";
@@ -368,13 +342,15 @@ export default {
     this.cancelAutoUpdate();
   },
   components: {
-    QR,
+    Deposit,
     QRScan,
   },
   methods: {
     onScan: function (result) {
       try {
-        this.sendTo = web3js.utils.toChecksumAddress(this.parseScanResult(result));
+        this.sendTo = web3js.utils.toChecksumAddress(
+          this.parseScanResult(result)
+        );
         this.showWithdrawal();
       } catch (e) {
         this.setError("Invalid Recipient Address: " + e.message);
@@ -617,13 +593,6 @@ export default {
       } else {
         this.sendAmount = this.assetList[this.sendContract].balance;
       }
-    },
-    copyToClipboard: function (text) {
-      if (!this.copySupported) {
-        return;
-      }
-
-      navigator.clipboard.writeText(text);
     },
     setNotice: function (text) {
       this.noticeMessage = text;
