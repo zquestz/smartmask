@@ -1,6 +1,7 @@
 {
   "name": "smartmask",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -26,5 +27,9 @@
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.15",
     "vite": "^2.5.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zquestz/smartmask"
   }
 }
