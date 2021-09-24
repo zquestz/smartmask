@@ -296,7 +296,7 @@ import Decimal from "decimal.js";
 import { setIntervalAsync } from "set-interval-async/fixed";
 import { clearIntervalAsync } from "set-interval-async";
 import { assetList } from "../assetList.js";
-import { each, map, sortBy, reverse } from "lodash";
+import { each, map, reverse } from "lodash";
 import { BigNumber } from "bignumber.js";
 
 const web3js = new Web3("wss://smartbch-wss.greyh.at");
@@ -681,7 +681,7 @@ export default {
         var pendingBalances = [];
 
         each(await this.getTokenBalances(), (v) => {
-          if (v.balance > 0) {
+          if (new BigNumber(v.balance).gt(0)) {
             pendingBalances.push(v);
           }
         });
