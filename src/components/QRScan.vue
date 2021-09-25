@@ -1,3 +1,5 @@
+<!--./src/components/QRScan.vue -->
+
 <template>
   <div class="mx-auto w-72 h-72 bg-black" id="reader"></div>
 </template>
@@ -10,17 +12,17 @@ export default {
     };
   },
   props: {
-    qrbox: {
+    aspectRatio: {
       type: Number,
-      default: 250,
+      default: 1,
     },
     fps: {
       type: Number,
       default: 10,
     },
-    aspectRatio: {
+    qrbox: {
       type: Number,
-      default: 1,
+      default: 250,
     },
   },
   mounted: function () {
@@ -29,9 +31,9 @@ export default {
     }
 
     const config = {
+      aspectRatio: this.aspectRatio,
       fps: this.fps,
       qrbox: this.qrbox,
-      aspectRatio: this.aspectRatio,
     };
 
     this.html5QrCode.start(

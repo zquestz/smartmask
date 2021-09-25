@@ -7,6 +7,61 @@
       {{ noticeMessage }}
     </p>
     <div v-if="hasActiveAccount()">
+      <div v-if="isAssetsView()">
+        <p class="text-lg mt-4 mb-2 font-semibold">
+          <img class="mx-auto mb-2 w-16" src="/img/bch.svg" />
+          {{ BCHBalance(balance) }} BCH
+        </p>
+        <button
+          @click="showWithdrawal()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Send
+        </button>
+        <button
+          @click="showDeposit()"
+          class="
+            m-1
+            bg-blue-500
+            hover:bg-blue-600
+            active:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          "
+        >
+          Receive
+        </button>
+        <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">
+          - Token Assets -
+        </h1>
+        <div
+          class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
+          v-for="asset in tokenBalances"
+          v-bind:key="asset.address"
+        >
+          <div class="flex-none">
+            <img class="m-2 w-8" :src="assetIcon(asset.address)" />
+          </div>
+          <div
+            class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
+          >
+            {{ assetBalanceFormatter(asset.balance) }} {{ asset.symbol }}
+          </div>
+        </div>
+      </div>
       <div v-if="isDepositView()">
         <Deposit
           :activeAccount="activeAccount"
@@ -184,61 +239,6 @@
           </button>
         </div>
       </div>
-      <div v-if="isAssetsView()">
-        <p class="text-lg mt-4 mb-2 font-semibold">
-          <img class="mx-auto mb-2 w-16" src="/img/bch.svg" />
-          {{ BCHBalance(balance) }} BCH
-        </p>
-        <button
-          @click="showWithdrawal()"
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
-        >
-          Send
-        </button>
-        <button
-          @click="showDeposit()"
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
-        >
-          Receive
-        </button>
-        <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">
-          - Token Assets -
-        </h1>
-        <div
-          class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
-          v-for="asset in tokenBalances"
-          v-bind:key="asset.address"
-        >
-          <div class="flex-none">
-            <img class="m-2 w-8" :src="assetIcon(asset.address)" />
-          </div>
-          <div
-            class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
-          >
-            {{ assetBalanceFormatter(asset.balance) }} {{ asset.symbol }}
-          </div>
-        </div>
-      </div>
       <div v-if="isScanView()">
         <QRScan :qrbox="200" :fps="10" :aspectRatio="1" @result="onScan" />
         <button
@@ -310,26 +310,30 @@ export default {
   name: "SmartMask",
   data: function () {
     return {
-      connected: null,
-      pendingConnection: null,
       accounts: [],
-      errorMessage: "",
-      noticeMessage: "",
       activeAccount: "",
+      assetList: assetList,
+      attemptedRegistration: false,
       balance: new BigNumber(0),
-      stopRequests: false,
-      timer: null,
       bindingRetries: 0,
       bindingsAdded: false,
+      connected: null,
       currentView: "assets",
-      attemptedRegistration: false,
+      errorMessage: "",
       noCopy: null,
-      assetList: assetList,
-      tokenBalances: [],
+      noticeMessage: "",
+      pendingConnection: null,
       sendAmount: new BigNumber(0),
       sendContract: "",
       sendTo: "",
+      stopRequests: false,
+      timer: null,
+      tokenBalances: [],
     };
+  },
+  components: {
+    Deposit,
+    QRScan,
   },
   created: async function () {
     this.noCopy = !navigator.clipboard;
@@ -340,10 +344,6 @@ export default {
   },
   unmounted: function () {
     this.cancelAutoUpdate();
-  },
-  components: {
-    Deposit,
-    QRScan,
   },
   methods: {
     onScan: function (result) {
@@ -808,17 +808,17 @@ export default {
       this.updateAccount();
     },
     resetData: function () {
-      this.connected = null;
-      this.pendingConnection = null;
       this.accounts = [];
-      this.errorMessage = "";
       this.activeAccount = "";
       this.balance = new BigNumber(0);
+      this.connected = null;
+      this.errorMessage = "";
+      this.pendingConnection = null;
+      this.sendAmount = new BigNumber(0);
+      this.sendContract = "";
+      this.sendTo = "";
       this.stopRequests = false;
       this.tokenBalances = {};
-      this.sendAmount = new BigNumber(0);
-      this.sendTo = "";
-      this.sendContract = "";
     },
   },
 };

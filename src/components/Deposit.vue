@@ -1,3 +1,5 @@
+<!--./src/components/Deposit.vue -->
+
 <template>
   <QR :account="activeAccount" :size="size" />
   <div class="m-3">
@@ -33,10 +35,6 @@ export default {
     return {};
   },
   props: {
-    size: {
-      type: Number,
-      default: 250,
-    },
     activeAccount: {
       type: String,
       default: "",
@@ -44,6 +42,10 @@ export default {
     copySupported: {
       type: Boolean,
       default: false,
+    },
+    size: {
+      type: Number,
+      default: 250,
     },
   },
   components: {

@@ -1,3 +1,5 @@
+<!--./src/components/QR.vue -->
+
 <template>
   <qrcode-vue
     :value="account"
