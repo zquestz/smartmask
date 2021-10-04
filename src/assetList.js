@@ -241,6 +241,14 @@ const assetList = {
     balance: 0,
     address: "0x3d13DaFcCA3a188DB340c81414239Bc2be312Ec9",
   },
+  "0xB5b1939ef0a3743d0Ae9282DbA62312b614A5Ac0": {
+    symbol: "POTA",
+    name: "Potato",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xB5b1939ef0a3743d0Ae9282DbA62312b614A5Ac0",
+  },
 };
 
 export { assetList };
