@@ -233,6 +233,14 @@ const assetList = {
     balance: 0,
     address: "0xC41C680c60309d4646379eD62020c534eB67b6f4",
   },
+  "0x3d13DaFcCA3a188DB340c81414239Bc2be312Ec9": {
+    symbol: "AxieBCH",
+    name: "AXIEBCH",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x3d13DaFcCA3a188DB340c81414239Bc2be312Ec9",
+  },
 };
 
 export { assetList };
