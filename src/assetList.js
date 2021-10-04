@@ -225,6 +225,14 @@ const assetList = {
     balance: 0,
     address: "0x5fa664f69c2a4a3ec94fac3cbf7049bd9ca73129",
   },
+  "0xC41C680c60309d4646379eD62020c534eB67b6f4": {
+    symbol: "xMIST",
+    name: "MISTbar",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xC41C680c60309d4646379eD62020c534eB67b6f4",
+  },
 };
 
 export { assetList };
