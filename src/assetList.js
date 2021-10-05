@@ -209,6 +209,14 @@ const assetList = {
     balance: 0,
     address: "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04",
   },
+  "0x79258952b4744CA82A3880dd69cfC4D681972FaE": {
+    symbol: "🪨",
+    name: "Pet Rock",
+    type: "SEP20",
+    decimals: 0,
+    balance: 0,
+    address: "0x79258952b4744CA82A3880dd69cfC4D681972FaE",
+  },
   "0x5fa664f69c2a4a3ec94fac3cbf7049bd9ca73129": {
     symbol: "MIST",
     name: "MistToken",
