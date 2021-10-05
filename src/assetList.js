@@ -209,6 +209,46 @@ const assetList = {
     balance: 0,
     address: "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04",
   },
+  "0x79258952b4744CA82A3880dd69cfC4D681972FaE": {
+    symbol: "🪨",
+    name: "Pet Rock",
+    type: "SEP20",
+    decimals: 0,
+    balance: 0,
+    address: "0x79258952b4744CA82A3880dd69cfC4D681972FaE",
+  },
+  "0x5fa664f69c2a4a3ec94fac3cbf7049bd9ca73129": {
+    symbol: "MIST",
+    name: "MistToken",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x5fa664f69c2a4a3ec94fac3cbf7049bd9ca73129",
+  },
+  "0xC41C680c60309d4646379eD62020c534eB67b6f4": {
+    symbol: "xMIST",
+    name: "MISTbar",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xC41C680c60309d4646379eD62020c534eB67b6f4",
+  },
+  "0x3d13DaFcCA3a188DB340c81414239Bc2be312Ec9": {
+    symbol: "AxieBCH",
+    name: "AXIEBCH",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x3d13DaFcCA3a188DB340c81414239Bc2be312Ec9",
+  },
+  "0xB5b1939ef0a3743d0Ae9282DbA62312b614A5Ac0": {
+    symbol: "POTA",
+    name: "Potato",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xB5b1939ef0a3743d0Ae9282DbA62312b614A5Ac0",
+  },
 };
 
 export { assetList };
