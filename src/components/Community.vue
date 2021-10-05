@@ -25,33 +25,13 @@
       </li>
       <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
-          @click="goToURI('https://benswap.cash/')"
-          class="cursor-pointer mx-auto mb-2"
-          src="/img/benswap.png"
-          width="200"
-          height="35"
-        />
-        <p class="mb-2">The smartBCH DEX.</p>
-        <a
-          class="
-            underline
-            text-blue-500
-            hover:text-blue-700
-            active:text-blue-900
-          "
-          href="https://benswap.cash/"
-          >benswap.cash</a
-        >
-      </li>
-      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
-        <img
           @click="goToURI('https://mistswap.fi/')"
           class="cursor-pointer mx-auto mb-2"
           src="/img/mistswap.png"
           width="200"
           height="35"
         />
-        <p class="mb-2">Alternative smartBCH DEX with a focus on MIST</p>
+        <p class="mb-2">The latest smartBCH DEX with a focus on MIST</p>
         <a
           class="
             underline
@@ -61,6 +41,26 @@
           "
           href="https://mistswap.fi/"
           >mistswap.fi</a
+        >
+      </li>
+      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
+        <img
+          @click="goToURI('https://benswap.cash/')"
+          class="cursor-pointer mx-auto mb-2"
+          src="/img/benswap.png"
+          width="200"
+          height="35"
+        />
+        <p class="mb-2">The first smartBCH DEX.</p>
+        <a
+          class="
+            underline
+            text-blue-500
+            hover:text-blue-700
+            active:text-blue-900
+          "
+          href="https://benswap.cash/"
+          >benswap.cash</a
         >
       </li>
       <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
