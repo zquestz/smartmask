@@ -249,6 +249,14 @@ const assetList = {
     balance: 0,
     address: "0xB5b1939ef0a3743d0Ae9282DbA62312b614A5Ac0",
   },
+  "0xc8E09AEdB3c949a875e1FD571dC4b3E48FB221f0": {
+    symbol: "MILK",
+    name: "MILK Token",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xc8E09AEdB3c949a875e1FD571dC4b3E48FB221f0",
+  },
 };
 
 export { assetList };
