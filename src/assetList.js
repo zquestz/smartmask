@@ -170,7 +170,7 @@ const assetList = {
     address: "0xFfA2394B61D3dE16538a2Bbf3491297Cc5a7C79a",
   },
   "0x2f309b9D47b1Ce7f0ec30a26baB2dEaB8c4ea5E9": {
-    symbol: "SHIBA",
+    symbol: "Shiba",
     name: "ShibaBCH",
     type: "SEP20",
     decimals: 18,
