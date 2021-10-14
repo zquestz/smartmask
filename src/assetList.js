@@ -257,6 +257,14 @@ const assetList = {
     balance: 0,
     address: "0xc8E09AEdB3c949a875e1FD571dC4b3E48FB221f0",
   },
+  "0x09A4CDb1569563fF277aC457cED35fe2551aEC1D": {
+    symbol: "CHEESE",
+    name: "Cheese",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x09A4CDb1569563fF277aC457cED35fe2551aEC1D",
+  },
 };
 
 export { assetList };
