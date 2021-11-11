@@ -265,13 +265,13 @@ const assetList = {
     balance: 0,
     address: "0x09A4CDb1569563fF277aC457cED35fe2551aEC1D",
   },
-  "0x0B00366FBF7037E9D75E4A569AB27DAB84759302": {
+  "0x0b00366fBF7037E9d75E4A569ab27dAB84759302": {
     symbol: "LAW",
     name: "LAW",
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x0B00366FBF7037E9D75E4A569AB27DAB84759302",
+    address: "0x0b00366fBF7037E9d75E4A569ab27dAB84759302",
   },
 };
 
