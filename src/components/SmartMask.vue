@@ -409,7 +409,13 @@ export default {
         each(resp, (_, i) => {
           const k = Object.keys(this.assetList)[i];
           const asset = this.assetList[k];
-          asset.balance = this.convertValue(resp[i], asset.decimals);
+          if (asset.symbol === "LAW") {
+            // LAW contract returns a long and invalid response.
+            // Must be truncated to get the right value.
+            asset.balance = this.convertValue(resp[i].substring(0,66), asset.decimals);
+          } else {
+            asset.balance = this.convertValue(resp[i], asset.decimals);
+          }
           newBalances.push(asset);
         });
 
