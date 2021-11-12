@@ -273,6 +273,14 @@ const assetList = {
     balance: 0,
     address: "0x0b00366fBF7037E9d75E4A569ab27dAB84759302",
   },
+  "0x9192940099fDB2338B928DE2cad9Cd1525fEa881": {
+    symbol: "BPAD",
+    name: "BCHPad",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x9192940099fDB2338B928DE2cad9Cd1525fEa881",
+  },
 };
 
 export { assetList };
