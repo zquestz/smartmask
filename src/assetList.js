@@ -273,6 +273,22 @@ const assetList = {
     balance: 0,
     address: "0x0b00366fBF7037E9d75E4A569ab27dAB84759302",
   },
+  "0x73BE9c8Edf5e951c9a0762EA2b1DE8c8F38B5e91": {
+    symbol: "TANGO",
+    name: "TangoToken",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x73BE9c8Edf5e951c9a0762EA2b1DE8c8F38B5e91",
+  },
+  "0x98Ff640323C059d8C4CB846976973FEEB0E068aA": {
+    symbol: "xTANGO",
+    name: "TANGObar",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x98Ff640323C059d8C4CB846976973FEEB0E068aA",
+  },
 };
 
 export { assetList };
