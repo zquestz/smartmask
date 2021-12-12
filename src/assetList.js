@@ -297,6 +297,142 @@ const assetList = {
     balance: 0,
     address: "0x98Ff640323C059d8C4CB846976973FEEB0E068aA",
   },
+  "0x2E1da8Eb00CD1FF9B201f51e3705D87e06313881": {
+    symbol: "BWB",
+    name: "Bismuth Win Bi",
+    type: "SEP20",
+    decimals: 8,
+    balance: 0,
+    address: "0x2E1da8Eb00CD1FF9B201f51e3705D87e06313881"
+  },
+  "0xF4b10fcC5C22C9E6746a8f4DAc07A59e79ef947A": {
+    symbol: "FATCAT",
+    name: "FATCAT",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xF4b10fcC5C22C9E6746a8f4DAc07A59e79ef947A"
+  },
+  "0x4F1480ba79F7477230ec3b2eCc868E8221925072": {
+    symbol: "KONRA",
+    name: "Konra",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x4F1480ba79F7477230ec3b2eCc868E8221925072"
+  },
+  "0x6732E55Ac3ECa734F54C26Bd8DF4eED52Fb79a6E": {
+    symbol: "JOY",
+    name: "Joystick",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x6732E55Ac3ECa734F54C26Bd8DF4eED52Fb79a6E"
+  },
+  "0x7642Df81b5BEAeEb331cc5A104bd13Ba68c34B91": {
+    symbol: "CLY",
+    name: "Celery",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x7642Df81b5BEAeEb331cc5A104bd13Ba68c34B91"
+  },
+  "0x49F9ECF126B6dDF51C731614755508A4674bA7eD": {
+    symbol: "RMZ",
+    name: "Xolos",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x49F9ECF126B6dDF51C731614755508A4674bA7eD"
+  },
+  "0x048a4811d30089b5AA86e2E711A6A4aa67dbe275": {
+    symbol: "MRUSD",
+    name: "MrUSD",
+    type: "SEP20",
+    decimals: 2,
+    balance: 0,
+    address: "0x048a4811d30089b5AA86e2E711A6A4aa67dbe275"
+  },
+  "0xF05bD3d7709980f60CD5206BddFFA8553176dd29": {
+    symbol: "SIDX",
+    name: "SmartIndex",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xF05bD3d7709980f60CD5206BddFFA8553176dd29"
+  },
+  "0xca0235058985fcc1839e9e37c10900a73c126708": {
+    symbol: "DAO",
+    name: "DAO",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xca0235058985fcc1839e9e37c10900a73c126708"
+  },
+  "0x77d4b6e44a53bbda9a1d156b32bb53a2d099e53d": {
+    symbol: "1BCH",
+    name: "1BCH",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x77d4b6e44a53bbda9a1d156b32bb53a2d099e53d"
+  },
+  "0xb4602588e5f1f9653b6f234206c91552e457facb": {
+    symbol: "rBCH",
+    name: "rBCH Token",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xb4602588e5f1f9653b6f234206c91552e457facb"
+  },
+  "0x225FCa2A940cd5B18DFb168cD9B7f921C63d7B6E": {
+    symbol: "FIRE",
+    name: "Incinerate",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x225FCa2A940cd5B18DFb168cD9B7f921C63d7B6E"
+  },
+  "0x659F04F36e90143fCaC202D4BC36C699C078fC98": {
+    symbol: "CLK",
+    name: "CATSLUCK",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x659F04F36e90143fCaC202D4BC36C699C078fC98"
+  },
+  "0x2b591190ff951f60cb9424664155e57a402c1ade": {
+    symbol: "🌙🌙🌙🌙",
+    name: "MoonMoonMoonMoon",
+    type: "SEP20",
+    decimals: 3,
+    balance: 0,
+    address: "0x2b591190ff951f60cb9424664155e57a402c1ade"
+  },
+  "0x8d7ea0ec6cab515463121a3c70df541f2f534909": {
+    symbol: "WOJAK",
+    name: "Wojak",
+    type: "SEP20",
+    decimals: 9,
+    balance: 0,
+    address: "0x8d7ea0ec6cab515463121a3c70df541f2f534909"
+  },
+  "0xc07545D17e716CF7FF24ed0eb16A69157A33aaCd": {
+    symbol: "BURN",
+    name: "Volcano",
+    type: "SEP20",
+    decimals: 9,
+    balance: 0,
+    address: "0xc07545D17e716CF7FF24ed0eb16A69157A33aaCd"
+  },
+  "0xd2597a0bde31Ddec2440E256d8AA35eb63F1A9e3": {
+    symbol: "GAME",
+    name: "Game",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xd2597a0bde31Ddec2440E256d8AA35eb63F1A9e3"
+  },
 };
 
 export { assetList };
