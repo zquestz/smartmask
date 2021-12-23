@@ -365,7 +365,7 @@ const assetList = {
     symbol: "DAO",
     name: "DAO",
     type: "SEP20",
-    decimals: 18,
+    decimals: 7,
     balance: 0,
     address: "0xca0235058985fcc1839e9e37c10900a73c126708"
   },
