@@ -412,7 +412,10 @@ export default {
           if (asset.symbol === "LAW") {
             // LAW contract returns a long and invalid response.
             // Must be truncated to get the right value.
-            asset.balance = this.convertValue(resp[i].substring(0,66), asset.decimals);
+            asset.balance = this.convertValue(
+              resp[i].substring(0, 66),
+              asset.decimals
+            );
           } else {
             asset.balance = this.convertValue(resp[i], asset.decimals);
           }
@@ -663,9 +666,13 @@ export default {
 
         this.tokenBalances = reverse(
           pendingBalances.sort(function (a, b) {
-            return new BigNumber(a.balance).gt(new BigNumber(b.balance))
-              ? 0
-              : -1;
+            if (a.symbol < b.symbol) {
+              return 1;
+            }
+            if (a.symbol > b.symbol) {
+              return -1;
+            }
+            return 0;
           })
         );
 
