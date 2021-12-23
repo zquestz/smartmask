@@ -440,6 +440,14 @@ const assetList = {
     decimals: 18,
     balance: 0,
     address: "0x9654b7C1b90Aff574C38ca5f7b3B8e52a385C9eA"
+  },
+  "0x4B85a666deC7C959e88b97814E46113601B07e57": {
+    symbol: "GoC",
+    name: "GoCrypto",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x4B85a666deC7C959e88b97814E46113601B07e57"
   }
 };
 
