@@ -433,6 +433,14 @@ const assetList = {
     balance: 0,
     address: "0xd2597a0bde31Ddec2440E256d8AA35eb63F1A9e3"
   },
+  "0x9654b7C1b90Aff574C38ca5f7b3B8e52a385C9eA": {
+    symbol: "LOVE",
+    name: "LOVE",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x9654b7C1b90Aff574C38ca5f7b3B8e52a385C9eA"
+  }
 };
 
 export { assetList };
