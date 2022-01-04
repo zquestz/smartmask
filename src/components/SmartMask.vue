@@ -808,7 +808,11 @@ export default {
         }
 
         this.resetData();
-        this.setError("Please connect to the smartBCH network!");
+        if (!this.backendAvailable()) {
+          this.setError("Please install MetaMask to get started!")
+        } else {
+          this.setError("Please login to MetaMask and connect to the smartBCH network!");
+        }
 
         if (this.bindingRetries < 15) {
           await delay(250);
