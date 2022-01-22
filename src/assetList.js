@@ -465,6 +465,14 @@ const assetList = {
     balance: 0,
     address: "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8"
   },
+  "0xff48aAbDDACdc8A6263A2eBC6C1A68d8c46b1bf7": {
+    symbol: "LPUNK",
+    name: "LawPunk",
+    type: "NFT",
+    decimals: 0,
+    balance: 0,
+    address: "0xff48aAbDDACdc8A6263A2eBC6C1A68d8c46b1bf7"
+  },
 };
 
 export { assetList };
