@@ -448,7 +448,23 @@ const assetList = {
     decimals: 18,
     balance: 0,
     address: "0x4B85a666deC7C959e88b97814E46113601B07e57"
-  }
+  },
+  "0x48973dbAC0d46B939CD12A7250eFBA965e8a8cf2": {
+    symbol: "REAP",
+    name: "Reaper",
+    type: "NFT",
+    decimals: 0,
+    balance: 0,
+    address: "0x48973dbAC0d46B939CD12A7250eFBA965e8a8cf2"
+  },
+  "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8": {
+    symbol: "PP",
+    name: "Poolside Puffer",
+    type: "NFT",
+    decimals: 0,
+    balance: 0,
+    address: "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8"
+  },
 };
 
 export { assetList };

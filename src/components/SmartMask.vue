@@ -44,6 +44,23 @@
         >
           Receive
         </button>
+        <h1 v-if="nftBalances.length > 0" class="mb-4 mt-8 font-semibold">
+          - NFT Assets -
+        </h1>
+        <div
+          class="px-4 m-auto max-w-xs flex flex-nowrap items-center"
+          v-for="asset in nftBalances"
+          v-bind:key="asset.address"
+        >
+          <div class="flex-none">
+            <img class="m-2 w-8" :src="assetIcon(asset.address)" />
+          </div>
+          <div
+            class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
+          >
+            <a target="_blank" :href="'https://oasis.cash/wallet/' + asset.address">{{ assetBalanceFormatter(asset.balance) }} {{ asset.balance > 1 ? asset.name + 's' : asset.name }}</a>
+          </div>
+        </div>
         <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">
           - Token Assets -
         </h1>
@@ -329,6 +346,7 @@ export default {
       stopRequests: false,
       timer: null,
       tokenBalances: [],
+      nftBalances: [],
     };
   },
   components: {
@@ -657,15 +675,32 @@ export default {
         );
 
         var pendingBalances = [];
+        var nftCollectionCounts = [];
 
         each(await this.getTokenBalances(), (v) => {
           if (new BigNumber(v.balance).gt(0)) {
-            pendingBalances.push(v);
+            if (v.type !== "NFT") {
+              pendingBalances.push(v);
+            } else {
+              nftCollectionCounts.push(v);
+            }
           }
         });
 
         this.tokenBalances = reverse(
           pendingBalances.sort(function (a, b) {
+            if (a.symbol < b.symbol) {
+              return 1;
+            }
+            if (a.symbol > b.symbol) {
+              return -1;
+            }
+            return 0;
+          })
+        );
+
+        this.nftBalances = reverse(
+          nftCollectionCounts.sort(function (a, b) {
             if (a.symbol < b.symbol) {
               return 1;
             }
@@ -836,6 +871,7 @@ export default {
       this.sendTo = "";
       this.stopRequests = false;
       this.tokenBalances = {};
+      this.nftBalances = {};
     },
   },
 };
