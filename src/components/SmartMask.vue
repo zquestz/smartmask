@@ -58,7 +58,7 @@
           <div
             class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
           >
-            <a target="_blank" :href="'https://oasis.cash/wallet/' + asset.address">{{ assetBalanceFormatter(asset.balance) }} {{ asset.balance > 1 ? asset.name + 's' : asset.name }}</a>
+            <a target="_blank" :href="assetHref(asset)">{{ assetBalanceFormatter(asset.balance) }} {{ asset.balance > 1 ? asset.name + 's' : asset.name }}</a>
           </div>
         </div>
         <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">
@@ -476,6 +476,13 @@ export default {
     },
     assetIcon: function (address) {
       return "/img/assets/" + address + ".png";
+    },
+    assetHref: function (asset) {
+      if (asset.symbol == "GAC") {
+        return "https://apes.cash/my-collection"
+      }
+
+      return "https://oasis.cash/wallet/" + asset.address
     },
     copySupported: function () {
       return this.noCopy !== true;

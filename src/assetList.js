@@ -473,6 +473,14 @@ const assetList = {
     balance: 0,
     address: "0xff48aAbDDACdc8A6263A2eBC6C1A68d8c46b1bf7"
   },
+  "0xC054A7F7866ba73889511c48967be776008eb408": {
+    symbol: "GAC",
+    name: "Gambling Ape",
+    type: "NFT",
+    decimals: 0,
+    balance: 0,
+    address: "0xC054A7F7866ba73889511c48967be776008eb408"
+  },
 };
 
 export { assetList };
