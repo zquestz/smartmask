@@ -481,6 +481,22 @@ const assetList = {
     balance: 0,
     address: "0xC054A7F7866ba73889511c48967be776008eb408"
   },
+  "0x35b3Ee79E1A7775cE0c11Bd8cd416630E07B0d6f": {
+    symbol: "LNS",
+    name: "Bitcoin Cash Name Service",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0x35b3Ee79E1A7775cE0c11Bd8cd416630E07B0d6f"
+  },
+  "0xBE7E034c86AC2a302f69ef3975e3D14820cC7660": {
+    symbol: "xLNS",
+    name: "LNSBar",
+    type: "SEP20",
+    decimals: 18,
+    balance: 0,
+    address: "0xBE7E034c86AC2a302f69ef3975e3D14820cC7660"
+  },
 };
 
 export { assetList };
