@@ -303,7 +303,7 @@ const assetList = {
     type: "SEP20",
     decimals: 8,
     balance: 0,
-    address: "0x2E1da8Eb00CD1FF9B201f51e3705D87e06313881"
+    address: "0x2E1da8Eb00CD1FF9B201f51e3705D87e06313881",
   },
   "0xF4b10fcC5C22C9E6746a8f4DAc07A59e79ef947A": {
     symbol: "FATCAT",
@@ -311,7 +311,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0xF4b10fcC5C22C9E6746a8f4DAc07A59e79ef947A"
+    address: "0xF4b10fcC5C22C9E6746a8f4DAc07A59e79ef947A",
   },
   "0x4F1480ba79F7477230ec3b2eCc868E8221925072": {
     symbol: "KONRA",
@@ -319,7 +319,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x4F1480ba79F7477230ec3b2eCc868E8221925072"
+    address: "0x4F1480ba79F7477230ec3b2eCc868E8221925072",
   },
   "0x6732E55Ac3ECa734F54C26Bd8DF4eED52Fb79a6E": {
     symbol: "JOY",
@@ -327,7 +327,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x6732E55Ac3ECa734F54C26Bd8DF4eED52Fb79a6E"
+    address: "0x6732E55Ac3ECa734F54C26Bd8DF4eED52Fb79a6E",
   },
   "0x7642Df81b5BEAeEb331cc5A104bd13Ba68c34B91": {
     symbol: "CLY",
@@ -335,7 +335,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x7642Df81b5BEAeEb331cc5A104bd13Ba68c34B91"
+    address: "0x7642Df81b5BEAeEb331cc5A104bd13Ba68c34B91",
   },
   "0x49F9ECF126B6dDF51C731614755508A4674bA7eD": {
     symbol: "RMZ",
@@ -343,7 +343,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x49F9ECF126B6dDF51C731614755508A4674bA7eD"
+    address: "0x49F9ECF126B6dDF51C731614755508A4674bA7eD",
   },
   "0x048a4811d30089b5AA86e2E711A6A4aa67dbe275": {
     symbol: "MRUSD",
@@ -351,7 +351,7 @@ const assetList = {
     type: "SEP20",
     decimals: 2,
     balance: 0,
-    address: "0x048a4811d30089b5AA86e2E711A6A4aa67dbe275"
+    address: "0x048a4811d30089b5AA86e2E711A6A4aa67dbe275",
   },
   "0xF05bD3d7709980f60CD5206BddFFA8553176dd29": {
     symbol: "SIDX",
@@ -359,7 +359,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0xF05bD3d7709980f60CD5206BddFFA8553176dd29"
+    address: "0xF05bD3d7709980f60CD5206BddFFA8553176dd29",
   },
   "0xca0235058985fcc1839e9e37c10900a73c126708": {
     symbol: "DAO",
@@ -367,7 +367,7 @@ const assetList = {
     type: "SEP20",
     decimals: 7,
     balance: 0,
-    address: "0xca0235058985fcc1839e9e37c10900a73c126708"
+    address: "0xca0235058985fcc1839e9e37c10900a73c126708",
   },
   "0x77d4b6e44a53bbda9a1d156b32bb53a2d099e53d": {
     symbol: "1BCH",
@@ -375,7 +375,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x77d4b6e44a53bbda9a1d156b32bb53a2d099e53d"
+    address: "0x77d4b6e44a53bbda9a1d156b32bb53a2d099e53d",
   },
   "0xb4602588e5f1f9653b6f234206c91552e457facb": {
     symbol: "rBCH",
@@ -383,7 +383,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0xb4602588e5f1f9653b6f234206c91552e457facb"
+    address: "0xb4602588e5f1f9653b6f234206c91552e457facb",
   },
   "0x225FCa2A940cd5B18DFb168cD9B7f921C63d7B6E": {
     symbol: "FIRE",
@@ -391,7 +391,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x225FCa2A940cd5B18DFb168cD9B7f921C63d7B6E"
+    address: "0x225FCa2A940cd5B18DFb168cD9B7f921C63d7B6E",
   },
   "0x659F04F36e90143fCaC202D4BC36C699C078fC98": {
     symbol: "CLK",
@@ -399,7 +399,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x659F04F36e90143fCaC202D4BC36C699C078fC98"
+    address: "0x659F04F36e90143fCaC202D4BC36C699C078fC98",
   },
   "0x2b591190ff951f60cb9424664155e57a402c1ade": {
     symbol: "🌙🌙🌙🌙",
@@ -407,7 +407,7 @@ const assetList = {
     type: "SEP20",
     decimals: 3,
     balance: 0,
-    address: "0x2b591190ff951f60cb9424664155e57a402c1ade"
+    address: "0x2b591190ff951f60cb9424664155e57a402c1ade",
   },
   "0x8d7ea0ec6cab515463121a3c70df541f2f534909": {
     symbol: "WOJAK",
@@ -415,7 +415,7 @@ const assetList = {
     type: "SEP20",
     decimals: 9,
     balance: 0,
-    address: "0x8d7ea0ec6cab515463121a3c70df541f2f534909"
+    address: "0x8d7ea0ec6cab515463121a3c70df541f2f534909",
   },
   "0xc07545D17e716CF7FF24ed0eb16A69157A33aaCd": {
     symbol: "BURN",
@@ -423,7 +423,7 @@ const assetList = {
     type: "SEP20",
     decimals: 9,
     balance: 0,
-    address: "0xc07545D17e716CF7FF24ed0eb16A69157A33aaCd"
+    address: "0xc07545D17e716CF7FF24ed0eb16A69157A33aaCd",
   },
   "0xd2597a0bde31Ddec2440E256d8AA35eb63F1A9e3": {
     symbol: "GAME",
@@ -431,7 +431,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0xd2597a0bde31Ddec2440E256d8AA35eb63F1A9e3"
+    address: "0xd2597a0bde31Ddec2440E256d8AA35eb63F1A9e3",
   },
   "0x9654b7C1b90Aff574C38ca5f7b3B8e52a385C9eA": {
     symbol: "LOVE",
@@ -439,7 +439,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x9654b7C1b90Aff574C38ca5f7b3B8e52a385C9eA"
+    address: "0x9654b7C1b90Aff574C38ca5f7b3B8e52a385C9eA",
   },
   "0x4B85a666deC7C959e88b97814E46113601B07e57": {
     symbol: "GoC",
@@ -447,7 +447,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x4B85a666deC7C959e88b97814E46113601B07e57"
+    address: "0x4B85a666deC7C959e88b97814E46113601B07e57",
   },
   "0x48973dbAC0d46B939CD12A7250eFBA965e8a8cf2": {
     symbol: "REAP",
@@ -455,15 +455,15 @@ const assetList = {
     type: "NFT",
     decimals: 0,
     balance: 0,
-    address: "0x48973dbAC0d46B939CD12A7250eFBA965e8a8cf2"
+    address: "0x48973dbAC0d46B939CD12A7250eFBA965e8a8cf2",
   },
   "0xc6f9DbbE871ed2f79E3fF584f8Aa30E29B35bA61": {
     symbol: "MDS",
-    name: "Moodies",
+    name: "Moodie",
     type: "NFT",
     decimals: 0,
     balance: 0,
-    address: "0xc6f9DbbE871ed2f79E3fF584f8Aa30E29B35bA61"
+    address: "0xc6f9DbbE871ed2f79E3fF584f8Aa30E29B35bA61",
   },
   "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8": {
     symbol: "PP",
@@ -471,7 +471,7 @@ const assetList = {
     type: "NFT",
     decimals: 0,
     balance: 0,
-    address: "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8"
+    address: "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8",
   },
   "0xff48aAbDDACdc8A6263A2eBC6C1A68d8c46b1bf7": {
     symbol: "LPUNK",
@@ -479,7 +479,7 @@ const assetList = {
     type: "NFT",
     decimals: 0,
     balance: 0,
-    address: "0xff48aAbDDACdc8A6263A2eBC6C1A68d8c46b1bf7"
+    address: "0xff48aAbDDACdc8A6263A2eBC6C1A68d8c46b1bf7",
   },
   "0xC054A7F7866ba73889511c48967be776008eb408": {
     symbol: "GAC",
@@ -487,7 +487,7 @@ const assetList = {
     type: "NFT",
     decimals: 0,
     balance: 0,
-    address: "0xC054A7F7866ba73889511c48967be776008eb408"
+    address: "0xC054A7F7866ba73889511c48967be776008eb408",
   },
   "0x35b3Ee79E1A7775cE0c11Bd8cd416630E07B0d6f": {
     symbol: "LNS",
@@ -495,7 +495,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0x35b3Ee79E1A7775cE0c11Bd8cd416630E07B0d6f"
+    address: "0x35b3Ee79E1A7775cE0c11Bd8cd416630E07B0d6f",
   },
   "0xBE7E034c86AC2a302f69ef3975e3D14820cC7660": {
     symbol: "xLNS",
@@ -503,7 +503,7 @@ const assetList = {
     type: "SEP20",
     decimals: 18,
     balance: 0,
-    address: "0xBE7E034c86AC2a302f69ef3975e3D14820cC7660"
+    address: "0xBE7E034c86AC2a302f69ef3975e3D14820cC7660",
   },
 };
 
