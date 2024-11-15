@@ -39,7 +39,7 @@ export default {
     this.html5QrCode.start(
       { facingMode: "environment" },
       config,
-      this.onScanSuccess
+      this.onScanSuccess,
     );
   },
   unmounted: function () {

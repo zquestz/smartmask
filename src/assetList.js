@@ -464,6 +464,7 @@ const assetList = {
     decimals: 0,
     balance: 0,
     address: "0xc6f9DbbE871ed2f79E3fF584f8Aa30E29B35bA61",
+    notListed: true,
   },
   "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8": {
     symbol: "PP",

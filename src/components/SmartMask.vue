@@ -14,33 +14,13 @@
         </p>
         <button
           @click="showWithdrawal()"
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
+          class="m-1 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Send
         </button>
         <button
           @click="showDeposit()"
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
+          class="m-1 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Receive
         </button>
@@ -56,9 +36,20 @@
             <img class="m-2 w-8" :src="assetIcon(asset.address)" />
           </div>
           <div
+            v-if="!asset.notListed"
             class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
           >
-            <a target="_blank" :href="assetHref(asset)">{{ assetBalanceFormatter(asset.balance) }} {{ asset.balance > 1 ? asset.name + 's' : asset.name }}</a>
+            <a target="_blank" :href="assetHref(asset)"
+              >{{ assetBalanceFormatter(asset.balance) }}
+              {{ asset.balance > 1 ? asset.name + "s" : asset.name }}</a
+            >
+          </div>
+          <div
+            v-if="asset.notListed"
+            class="m-2 text-left overflow-hidden overflow-ellipsis flex-grow"
+          >
+            {{ assetBalanceFormatter(asset.balance) }}
+            {{ asset.balance > 1 ? asset.name + "s" : asset.name }}
           </div>
         </div>
         <h1 v-if="tokenBalances.length > 0" class="mb-4 mt-8 font-semibold">
@@ -86,17 +77,7 @@
         />
         <button
           @click="goHome()"
-          class="
-            m-1
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
+          class="m-1 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Close
         </button>
@@ -107,16 +88,7 @@
             <img class="w-16 block mb-2 mx-auto" :src="assetImage()" />
             <select
               v-model="sendContract"
-              class="
-                field
-                p-2
-                font-mono
-                w-full
-                outline-none
-                rounded-l
-                mb-4
-                bg-white
-              "
+              class="field p-2 font-mono w-full outline-none rounded-l mb-4 bg-white"
             >
               <option value="">BCH - {{ balance }}</option>
               <option
@@ -143,16 +115,7 @@
               <div>
                 <button
                   @click="showScan()"
-                  class="
-                    bg-blue-500
-                    hover:bg-blue-600
-                    active:bg-blue-700
-                    text-white
-                    font-bold
-                    py-2
-                    px-3
-                    rounded-r
-                  "
+                  class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-3 rounded-r"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -190,17 +153,7 @@
               <div>
                 <button
                   @click="maxSend()"
-                  class="
-                    bg-blue-500
-                    hover:bg-blue-600
-                    active:bg-blue-700
-                    text-white
-                    font-bold
-                    py-2
-                    px-3
-                    rounded-r
-                    align-bottom
-                  "
+                  class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-3 rounded-r align-bottom"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -222,35 +175,13 @@
           </div>
           <button
             @click="goHome()"
-            class="
-              m-1
-              bg-gray-500
-              hover:bg-blue-600
-              active:bg-blue-700
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-              align-bottom
-            "
+            class="m-1 bg-gray-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 rounded align-bottom"
           >
             Cancel
           </button>
           <button
             @click="sendAction()"
-            class="
-              m-1
-              bg-blue-500
-              hover:bg-blue-600
-              active:bg-blue-700
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-              align-bottom
-            "
+            class="m-1 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 rounded align-bottom"
           >
             Send
           </button>
@@ -260,17 +191,7 @@
         <QRScan :qrbox="200" :fps="10" :aspectRatio="1" @result="onScan" />
         <button
           @click="showWithdrawal()"
-          class="
-            m-2
-            bg-blue-500
-            hover:bg-blue-600
-            active:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
-          "
+          class="m-2 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Close
         </button>
@@ -367,7 +288,7 @@ export default {
     onScan: function (result) {
       try {
         this.sendTo = web3js.utils.toChecksumAddress(
-          this.parseScanResult(result)
+          this.parseScanResult(result),
         );
         this.showWithdrawal();
       } catch (e) {
@@ -419,7 +340,7 @@ export default {
                 Web3.utils.stripHexPrefix(this.activeAccount),
               returnType: "uint256",
             };
-          })
+          }),
         );
 
         var newBalances = [];
@@ -432,7 +353,7 @@ export default {
             // Must be truncated to get the right value.
             asset.balance = this.convertValue(
               resp[i].substring(0, 66),
-              asset.decimals
+              asset.decimals,
             );
           } else {
             asset.balance = this.convertValue(resp[i], asset.decimals);
@@ -457,7 +378,7 @@ export default {
               } else {
                 res(data);
               }
-            }
+            },
           );
           batch.add(req);
         });
@@ -470,7 +391,7 @@ export default {
       const convertedValue = new BigNumber(
         new BigNumber(data)
           .dividedBy(new BigNumber(`1e${decimals}`))
-          .toFixed(decimals)
+          .toFixed(decimals),
       );
       return convertedValue.toString();
     },
@@ -479,10 +400,14 @@ export default {
     },
     assetHref: function (asset) {
       if (asset.symbol == "GAC") {
-        return "https://apes.cash/my-collection"
+        return "https://apes.cash/my-collection";
       }
 
-      return "https://oasis.cash/wallet/" + asset.address
+      return (
+        "https://app.withmantra.com/market/collection/" +
+        asset.address +
+        "?chain_id=10000"
+      );
     },
     copySupported: function () {
       return this.noCopy !== true;
@@ -678,7 +603,7 @@ export default {
     updateBalance: async function () {
       if (this.connected) {
         this.balance = new Decimal(
-          web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount))
+          web3js.utils.fromWei(await web3js.eth.getBalance(this.activeAccount)),
         );
 
         var pendingBalances = [];
@@ -703,7 +628,7 @@ export default {
               return -1;
             }
             return 0;
-          })
+          }),
         );
 
         this.nftBalances = reverse(
@@ -715,7 +640,7 @@ export default {
               return -1;
             }
             return 0;
-          })
+          }),
         );
 
         console.log("Refreshing balance for " + this.activeAccount);
@@ -851,9 +776,11 @@ export default {
 
         this.resetData();
         if (!this.backendAvailable()) {
-          this.setError("Please install MetaMask to get started!")
+          this.setError("Please install MetaMask to get started!");
         } else {
-          this.setError("Please login to MetaMask and connect to the smartBCH network!");
+          this.setError(
+            "Please login to MetaMask and connect to the smartBCH network!",
+          );
         }
 
         if (this.bindingRetries < 15) {

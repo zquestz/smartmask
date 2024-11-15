@@ -45,26 +45,6 @@
       </li>
       <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
         <img
-          @click="goToURI('https://oasis.cash/')"
-          class="cursor-pointer mx-auto mb-2"
-          src="/img/oasis.png"
-          width="200"
-          height="80"
-        />
-        <p class="mb-2">The premier NFT marketplace for smartBCH.</p>
-        <a
-          class="
-            underline
-            text-blue-500
-            hover:text-blue-700
-            active:text-blue-900
-          "
-          href="https://oasis.cash"
-          >oasis.cash</a
-        >
-      </li>
-      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
-        <img
           @click="goToURI('https://benswap.cash/')"
           class="cursor-pointer mx-auto mb-2"
           src="/img/benswap.png"
@@ -84,33 +64,6 @@
         >
       </li>
       <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
-        <img
-          @click="goToURI('https://coinflex.com/')"
-          class="cursor-pointer mx-auto mb-2"
-          src="/img/coinflex.png"
-          width="200"
-          height="38"
-        />
-        <p class="mb-2">Buy BCH and switch between chains.</p>
-        <a
-          class="
-            underline
-            text-blue-500
-            hover:text-blue-700
-            active:text-blue-900
-          "
-          href="https://coinflex.com/"
-          >coinflex.com</a
-        >
-      </li>
-      <li class="my-4 border bg-white rounded-lg p-4 border-gray-300">
-        <img
-          @click="goToURI('https://smartscan.cash/')"
-          class="cursor-pointer mx-auto mb-2"
-          src="/img/smartscan.png"
-          width="200"
-          height="53"
-        />
         <p class="mb-2">The primary smartBCH explorer.</p>
         <a
           class="
@@ -119,28 +72,8 @@
             hover:text-blue-700
             active:text-blue-900
           "
-          href="https://smartscan.cash/"
-          >smartscan.cash</a
-        >
-      </li>
-      <li class="mt-4 border bg-white rounded-lg p-4 border-gray-300">
-        <img
-          @click="goToURI('https://marketcap.cash/')"
-          class="cursor-pointer mx-auto mb-2"
-          src="/img/marketcapcash.png"
-          width="200"
-          height="22"
-        />
-        <p class="mb-2">Price information for smartBCH tokens.</p>
-        <a
-          class="
-            underline
-            text-blue-500
-            hover:text-blue-700
-            active:text-blue-900
-          "
-          href="https://marketcap.cash/"
-          >marketcap.cash</a
+          href="https://smartscout.cash/"
+          >smartscout.cash</a
         >
       </li>
     </ul>

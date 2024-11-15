@@ -7,14 +7,7 @@
     <a
       v-if="copySupported"
       @click="copyToClipboard(activeAccount)"
-      class="
-        break-all
-        font-mono
-        whitespace-pre-wrap
-        text-blue-500 text-xs
-        hover:text-blue-700
-        cursor-pointer
-      "
+      class="break-all font-mono whitespace-pre-wrap text-blue-500 text-xs hover:text-blue-700 cursor-pointer"
     >
       {{ activeAccount }}
     </a>
