@@ -564,9 +564,6 @@ export default {
     BCHBalance: function (bal) {
       return new BigNumber(bal.toFixed(8)).toString();
     },
-    goToSmartScan: function () {
-      location.href = this.smartScanURI(this.activeAccount);
-    },
     paste: async function () {
       if (this.copySupported()) {
         this.sendTo = await navigator.clipboard.readText();
@@ -645,9 +642,6 @@ export default {
 
         console.log("Refreshing balance for " + this.activeAccount);
       }
-    },
-    smartScanURI: function (a) {
-      return "https://smartscan.cash/address/" + a;
     },
     unavailable: function () {
       return !(this.backendAvailable() && this.validNetwork());
@@ -731,7 +725,7 @@ export default {
           symbol: "BCH",
           decimals: 18,
         },
-        blockExplorerUrls: ["https://smartscan.cash"],
+        blockExplorerUrls: ["https://smartscout.cash/"],
         iconUrls: ["https://smartmask.cash/img/smartbch_logo.png"],
       };
     },
